@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.email.mapper.EmailRecordMapper">
+
+    <resultMap type="com.ruoyi.email.domain.EmailRecord" id="EmailRecordResult">
+        <result property="id" column="id"/>
+        <result property="emailTemplate" column="email_template"/>
+        <result property="subject" column="subject"/>
+        <result property="fromMail" column="from_mail"/>
+        <result property="toMail" column="to_mail"/>
+        <result property="ccMails" column="cc_mails"/>
+        <result property="kvs" column="kvs"/>
+        <result property="status" column="status"/>
+        <result property="createTime" column="create_time"/>
+        <result property="createTimestamp" column="create_timestamp"/>
+        <result property="errMsg" column="err_msg"/>
+        <result property="lastRetryTimestamp" column="last_retry_timestamp"/>
+        <result property="retryNumbers" column="retry_numbers"/>
+    </resultMap>
+
+    <sql id="selectEmailRecordVo">
+        select id,
+               email_template,
+               subject,
+               from_mail,
+               to_mail,
+               cc_mails,
+               kvs,
+               status,
+               create_time,
+               create_timestamp,
+               err_msg,
+               last_retry_timestamp,
+               retry_numbers
+        from email_record
+    </sql>
+
+    <select id="selectEmailRecordList" parameterType="com.ruoyi.email.domain.EmailRecord" resultMap="EmailRecordResult">
+        <include refid="selectEmailRecordVo"/>
+        <where>
+            <if test="emailTemplate != null  and emailTemplate != ''">and email_template = #{emailTemplate}</if>
+            <if test="subject != null  and subject != ''">and subject = #{subject}</if>
+            <if test="fromMail != null  and fromMail != ''">and from_mail = #{fromMail}</if>
+            <if test="toMail != null  and toMail != ''">and to_mail = #{toMail}</if>
+            <if test="ccMails != null  and ccMails != ''">and cc_mails = #{ccMails}</if>
+            <if test="kvs != null  and kvs != ''">and kvs = #{kvs}</if>
+            <if test="status != null ">and status = #{status}</if>
+            <if test="createTimestamp != null ">and create_timestamp = #{createTimestamp}</if>
+            <if test="errMsg != null  and errMsg != ''">and err_msg = #{errMsg}</if>
+            <if test="lastRetryTimestamp != null ">and last_retry_timestamp = #{lastRetryTimestamp}</if>
+            <if test="retryNumbers != null ">and retry_numbers = #{retryNumbers}</if>
+        </where>
+    </select>
+
+    <select id="selectEmailRecordById" parameterType="Long" resultMap="EmailRecordResult">
+        <include refid="selectEmailRecordVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectEmailRecordListByLimit" resultType="com.ruoyi.email.domain.EmailRecord">
+        <include refid="selectEmailRecordVo"/>
+        <where>
+            <if test="emailTemplate != null  and emailTemplate != ''">and email_template = #{emailTemplate}</if>
+            <if test="subject != null  and subject != ''">and subject = #{subject}</if>
+            <if test="fromMail != null  and fromMail != ''">and from_mail = #{fromMail}</if>
+            <if test="toMail != null  and toMail != ''">and to_mail = #{toMail}</if>
+            <if test="ccMails != null  and ccMails != ''">and cc_mails = #{ccMails}</if>
+            <if test="kvs != null  and kvs != ''">and kvs = #{kvs}</if>
+            <if test="status != null ">and status = #{status}</if>
+            <if test="createTimestamp != null ">and create_timestamp = #{createTimestamp}</if>
+            <if test="errMsg != null  and errMsg != ''">and err_msg = #{errMsg}</if>
+            <if test="lastRetryTimestamp != null ">and last_retry_timestamp = #{lastRetryTimestamp}</if>
+            <if test="retryNumbers != null ">and retry_numbers = #{retryNumbers}</if>
+        </where>
+        limit 10
+    </select>
+
+    <insert id="insertEmailRecord" parameterType="com.ruoyi.email.domain.EmailRecord" useGeneratedKeys="true" keyProperty="id">
+        insert into email_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="emailTemplate != null and emailTemplate != ''">email_template,</if>
+            <if test="subject != null and subject != ''">subject,</if>
+            <if test="fromMail != null and fromMail != ''">from_mail,</if>
+            <if test="toMail != null and toMail != ''">to_mail,</if>
+            <if test="ccMails != null and ccMails != ''">cc_mails,</if>
+            <if test="kvs != null and kvs != ''">kvs,</if>
+            <if test="status != null">status,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createTimestamp != null">create_timestamp,</if>
+            <if test="errMsg != null">err_msg,</if>
+            <if test="lastRetryTimestamp != null">last_retry_timestamp,</if>
+            <if test="retryNumbers != null">retry_numbers,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="emailTemplate != null and emailTemplate != ''">#{emailTemplate},</if>
+            <if test="subject != null and subject != ''">#{subject},</if>
+            <if test="fromMail != null and fromMail != ''">#{fromMail},</if>
+            <if test="toMail != null and toMail != ''">#{toMail},</if>
+            <if test="ccMails != null and ccMails != ''">#{ccMails},</if>
+            <if test="kvs != null and kvs != ''">#{kvs},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createTimestamp != null">#{createTimestamp},</if>
+            <if test="errMsg != null">#{errMsg},</if>
+            <if test="lastRetryTimestamp != null">#{lastRetryTimestamp},</if>
+            <if test="retryNumbers != null">#{retryNumbers},</if>
+        </trim>
+    </insert>
+
+    <update id="updateEmailRecord" parameterType="com.ruoyi.email.domain.EmailRecord">
+        update email_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="emailTemplate != null and emailTemplate != ''">email_template = #{emailTemplate},</if>
+            <if test="subject != null and subject != ''">subject = #{subject},</if>
+            <if test="fromMail != null and fromMail != ''">from_mail = #{fromMail},</if>
+            <if test="toMail != null and toMail != ''">to_mail = #{toMail},</if>
+            <if test="ccMails != null and ccMails != ''">cc_mails = #{ccMails},</if>
+            <if test="kvs != null and kvs != ''">kvs = #{kvs},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createTimestamp != null">create_timestamp = #{createTimestamp},</if>
+            <if test="errMsg != null">err_msg = #{errMsg},</if>
+            <if test="lastRetryTimestamp != null">last_retry_timestamp = #{lastRetryTimestamp},</if>
+            <if test="retryNumbers != null">retry_numbers = #{retryNumbers},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteEmailRecordById" parameterType="Long">
+        delete
+        from email_record
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteEmailRecordByIds" parameterType="String">
+        delete from email_record where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

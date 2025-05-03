@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.website.mapper.CategoryLangMapper">
+    
+    <resultMap type="CategoryLang" id="CategoryLangResult">
+        <result property="id"    column="id"    />
+        <result property="categoryId"    column="category_id"    />
+        <result property="name"    column="name"    />
+        <result property="parentId"    column="parent_id"    />
+        <result property="sort"    column="sort"    />
+        <result property="path"    column="path"    />
+        <result property="component"    column="component"    />
+        <result property="visible"    column="visible"    />
+        <result property="status"    column="status"    />
+        <result property="menuType"    column="menu_type"    />
+        <result property="language"    column="language"    />
+        <result property="icon"    column="icon"    />
+        <result property="topOrBottom"    column="top_or_bottom"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectCategoryLangVo">
+        select id, category_id, name, parent_id, sort, path, component, visible, status, menu_type, language, icon,
+        top_or_bottom,create_by, create_time, update_by, update_time, del_flag, remark from website_category_lang
+    </sql>
+
+    <select id="selectCategoryLangList" parameterType="CategoryLang" resultMap="CategoryLangResult">
+        <include refid="selectCategoryLangVo"/>
+        <where>
+            <if test="categoryId != null "> and category_id = #{categoryId}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="parentId != null "> and parent_id = #{parentId}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="path != null  and path != ''"> and `path` = #{path}</if>
+            <if test="component != null  and component != ''"> and component = #{component}</if>
+            <if test="visible != null  and visible != ''"> and visible = #{visible}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="menuType != null  and menuType != ''"> and menu_type = #{menuType}</if>
+            <if test="language != null  and language != ''"> and `language` = #{language}</if>
+            <if test="icon != null  and icon != ''"> and icon = #{icon}</if>
+            <if test="topOrBottom != null"> and (top_or_bottom = #{topOrBottom} or top_or_bottom = 2)</if>
+        </where>
+        order by sort
+    </select>
+    
+    <select id="selectCategoryLangById" parameterType="Long" resultMap="CategoryLangResult">
+        <include refid="selectCategoryLangVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCategoryLang" parameterType="CategoryLang" useGeneratedKeys="true" keyProperty="id">
+        insert into website_category_lang
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="categoryId != null and categoryId != ''">category_id,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="parentId != null">parent_id,</if>
+            <if test="sort != null">sort,</if>
+            <if test="path != null">path,</if>
+            <if test="component != null">component,</if>
+            <if test="visible != null">visible,</if>
+            <if test="status != null">status,</if>
+            <if test="menuType != null">menu_type,</if>
+            <if test="language != null">language,</if>
+            <if test="icon != null">icon,</if>
+            <if test="topOrBottom != null">top_or_bottom,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="categoryId != null and categoryId != ''">#{categoryId},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="parentId != null">#{parentId},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="path != null">#{path},</if>
+            <if test="component != null">#{component},</if>
+            <if test="visible != null">#{visible},</if>
+            <if test="status != null">#{status},</if>
+            <if test="menuType != null">#{menuType},</if>
+            <if test="language != null">#{language},</if>
+            <if test="icon != null">#{icon},</if>
+            <if test="topOrBottom != null">#{topOrBottom},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCategoryLang" parameterType="CategoryLang">
+        update website_category_lang
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="categoryId != null and categoryId != ''">category_id = #{categoryId},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="parentId != null">parent_id = #{parentId},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="path != null">path = #{path},</if>
+            <if test="component != null">component = #{component},</if>
+            <if test="visible != null">visible = #{visible},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="menuType != null">menu_type = #{menuType},</if>
+            <if test="language != null">language = #{language},</if>
+            <if test="icon != null">icon = #{icon},</if>
+            <if test="topOrBottom != null">top_or_bottom = #{topOrBottom},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCategoryLangById" parameterType="Long">
+        delete from website_category_lang where id = #{id}
+    </delete>
+
+    <delete id="deleteCategoryLangByIds" parameterType="String">
+        delete from website_category_lang where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <insert id="batchInsert">
+        insert into website_category_lang
+        (category_id, `name`, parent_id, sort, `path`, component,
+        visible, status, menu_type, `language`, icon, top_or_bottom,
+        create_by, create_time, del_flag, remark)
+        values
+        <foreach collection ="list" item="item" index="index" separator =",">
+            (#{item.categoryId},
+            #{item.name},
+            #{item.parentId},
+            #{item.sort},
+            #{item.path},
+            #{item.component},
+            #{item.visible},
+            #{item.status},
+            #{item.menuType},
+            #{item.language},
+            #{item.icon},
+            #{item.topOrBottom},
+            #{item.createBy},
+            #{item.createTime},
+            #{item.delFlag},
+            #{item.remark})
+        </foreach >
+    </insert>
+
+    <delete id="deleteByCategoryIds" parameterType="Long">
+        delete from website_category_lang where category_id in
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

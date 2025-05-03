@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.website.mapper.JoinUsMailMapper">
+    
+    <resultMap type="JoinUsMail" id="JoinUsMailResult">
+        <result property="id"    column="id"    />
+        <result property="fullName"    column="full_name"    />
+        <result property="nationality"    column="nationality"    />
+        <result property="email"    column="email"    />
+        <result property="phone"    column="phone"    />
+        <result property="currCountry"    column="curr_country"    />
+        <result property="currCompany"    column="curr_company"    />
+        <result property="resumeUrl"    column="resume_url"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="areaName"    column="area_name"    />
+        <result property="categoryName"    column="category_name"    />
+        <result property="jobTitle"    column="job_title"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateBy"    column="update_by"    />
+    </resultMap>
+
+    <sql id="selectJoinUsMailVo">
+        select id, full_name, nationality, email, phone, curr_country, curr_company, resume_url,area_name,category_name,job_title,
+        create_time, update_time, create_by, update_by from website_join_us_mail
+    </sql>
+
+    <select id="selectJoinUsMailList" parameterType="JoinUsMail" resultMap="JoinUsMailResult">
+        <include refid="selectJoinUsMailVo"/>
+        <where>  
+            <if test="fullName != null  and fullName != ''"> and full_name like concat('%', #{fullName}, '%')</if>
+            <if test="areaName != null  and areaName != ''"> and area_name like concat('%', #{areaName}, '%')</if>
+            <if test="categoryName != null  and categoryName != ''"> and category_name like concat('%', #{categoryName}, '%')</if>
+            <if test="nationality != null  and nationality != ''"> and nationality = #{nationality}</if>
+            <if test="email != null  and email != ''"> and email = #{email}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="currCountry != null  and currCountry != ''"> and curr_country = #{currCountry}</if>
+            <if test="currCompany != null  and currCompany != ''"> and curr_company = #{currCompany}</if>
+            <if test="resumeUrl != null  and resumeUrl != ''"> and resume_url = #{resumeUrl}</if>
+        </where>
+        order by create_time desc
+    </select>
+    
+    <select id="selectJoinUsMailById" parameterType="Long" resultMap="JoinUsMailResult">
+        <include refid="selectJoinUsMailVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertJoinUsMail" parameterType="JoinUsMail" useGeneratedKeys="true" keyProperty="id">
+        insert into website_join_us_mail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fullName != null">full_name,</if>
+            <if test="nationality != null">nationality,</if>
+            <if test="email != null">email,</if>
+            <if test="phone != null">phone,</if>
+            <if test="currCountry != null">curr_country,</if>
+            <if test="currCompany != null">curr_company,</if>
+            <if test="resumeUrl != null">resume_url,</if>
+            <if test="areaName != null">area_name,</if>
+            <if test="categoryName != null">category_name,</if>
+            <if test="jobTitle != null">job_title,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateBy != null">update_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fullName != null">#{fullName},</if>
+            <if test="nationality != null">#{nationality},</if>
+            <if test="email != null">#{email},</if>
+            <if test="phone != null">#{phone},</if>
+            <if test="currCountry != null">#{currCountry},</if>
+            <if test="currCompany != null">#{currCompany},</if>
+            <if test="resumeUrl != null">#{resumeUrl},</if>
+            <if test="areaName != null">#{areaName},</if>
+            <if test="categoryName != null">#{categoryName},</if>
+            <if test="jobTitle != null">#{jobTitle},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+         </trim>
+    </insert>
+
+    <update id="updateJoinUsMail" parameterType="JoinUsMail">
+        update website_join_us_mail
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fullName != null">full_name = #{fullName},</if>
+            <if test="nationality != null">nationality = #{nationality},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="currCountry != null">curr_country = #{currCountry},</if>
+            <if test="currCompany != null">curr_company = #{currCompany},</if>
+            <if test="resumeUrl != null">resume_url = #{resumeUrl},</if>
+            <if test="areaName != null">area_name = #{areaName},</if>
+            <if test="categoryName != null">category_name = #{categoryName},</if>
+            <if test="jobTitle != null">job_title = #{jobTitle}</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteJoinUsMailById" parameterType="Long">
+        delete from website_join_us_mail where id = #{id}
+    </delete>
+
+    <delete id="deleteJoinUsMailByIds" parameterType="String">
+        delete from website_join_us_mail where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

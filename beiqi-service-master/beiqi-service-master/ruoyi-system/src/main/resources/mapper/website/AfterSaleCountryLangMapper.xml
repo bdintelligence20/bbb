@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.AfterSaleCountryLangMapper">
+    
+    <resultMap type="AfterSaleCountryLang" id="AfterSaleCountryLangResult">
+        <result property="id"    column="id"    />
+        <result property="countryId"    column="country_id"    />
+        <result property="name"    column="name"    />
+        <result property="language"    column="language"    />
+        <result property="linkUrl"    column="link_url"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateBy"    column="update_by"    />
+    </resultMap>
+
+    <sql id="selectAfterSaleCountryLangVo">
+        select id, country_id, `name`, `language`, link_url, create_time, update_time, create_by, update_by from website_after_sale_country_lang
+    </sql>
+
+    <select id="selectAfterSaleCountryLangList" parameterType="AfterSaleCountryLang" resultMap="AfterSaleCountryLangResult">
+        <include refid="selectAfterSaleCountryLangVo"/>
+        <where>  
+            <if test="countryId != null "> and country_id = #{countryId}</if>
+            <if test="name != null  and name != ''"> and `name` like concat('%', #{name}, '%')</if>
+            <if test="language != null  and language != ''"> and `language` = #{language}</if>
+            <if test="linkUrl != null  and linkUrl != ''"> and link_url = #{linkUrl}</if>
+        </where>
+    </select>
+    
+    <select id="selectAfterSaleCountryLangById" parameterType="Long" resultMap="AfterSaleCountryLangResult">
+        <include refid="selectAfterSaleCountryLangVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertAfterSaleCountryLang" parameterType="AfterSaleCountryLang" useGeneratedKeys="true" keyProperty="id">
+        insert into website_after_sale_country_lang
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="countryId != null">country_id,</if>
+            <if test="name != null">`name`,</if>
+            <if test="language != null">`language`,</if>
+            <if test="linkUrl != null">link_url,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateBy != null">update_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="countryId != null">#{countryId},</if>
+            <if test="name != null">#{name},</if>
+            <if test="language != null">#{language},</if>
+            <if test="linkUrl != null">#{linkUrl},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+         </trim>
+    </insert>
+
+    <update id="updateAfterSaleCountryLang" parameterType="AfterSaleCountryLang">
+        update website_after_sale_country_lang
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="countryId != null">country_id = #{countryId},</if>
+            <if test="name != null">`name` = #{name},</if>
+            <if test="language != null">`language` = #{language},</if>
+            <if test="linkUrl != null">link_url = #{linkUrl},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteAfterSaleCountryLangById" parameterType="Long">
+        delete from website_after_sale_country_lang where id = #{id}
+    </delete>
+
+    <delete id="deleteAfterSaleCountryLangByIds">
+        delete from website_after_sale_country_lang where id in 
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <insert id="batchInsert">
+        insert into website_after_sale_country_lang
+        (country_id, `name`, `language`, link_url, create_time, update_time, create_by, update_by)
+        values
+        <foreach collection ="list" item="item" index="index" separator =",">
+            (#{item.countryId},
+            #{item.name},
+            #{item.language},
+            #{item.linkUrl},
+            #{item.createTime},
+            #{item.updateTime},
+            #{item.createBy},
+            #{item.updateBy})
+        </foreach >
+    </insert>
+
+    <delete id="deleteByCountryIds" parameterType="String">
+        delete from website_after_sale_country_lang where country_id in
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

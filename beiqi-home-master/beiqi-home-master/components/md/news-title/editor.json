@@ -1,0 +1,75 @@
+{
+  "defaultValue": {
+    "title": {"value":"Please enter the title"},
+    "scpaceTop": 1,
+    "scpaceBottom": 1
+  },
+  "formItems": [
+    {
+      "type": "editor-form-style-text-input",
+      "elFormItemProps": {
+        "prop": "title",
+        "label": "Title name"
+      },
+      "elFormItemChildProps": {
+        "placeholder": "Please enter the title"
+      }
+    },
+    {
+      "type": "el-slider",
+      "elFormItemProps": {
+        "prop": "scpaceTop",
+        "label": "Spacing top"
+      },
+      "elFormItemChildProps": {
+        "placeholder": "place input the spacing",
+        ":step": "0.1",
+        ":min": 0,
+        ":max": 10,
+        "style":"margin: 0 1em;",
+        "@input": "handleSubmit"
+      }
+    },
+    {
+      "type": "el-slider",
+      "elFormItemProps": {
+        "prop": "scpaceBottom",
+        "label": "Spacing bottom"
+      },
+      "elFormItemChildProps": {
+        "placeholder": "place input the spacing",
+        ":step": "0.1",
+        ":min": 0,
+        ":max": 10,
+        "style":"margin: 0 1em;",
+        "@input": "handleSubmit"
+      }
+    },
+    {
+      "type": "el-switch",
+      "elFormItemProps": {
+        "prop": "darkTheme",
+        "label": "Theme"
+      },
+      "elFormItemChildProps": {
+        "active-text": "Dark theme",
+        "inactive-text": "Bright color theme",
+        "@change": "handleSubmit"
+      }
+    }
+  ],
+  "i18n": {
+    "en": {
+      "Title name": "Title name",
+      "Spacing bottom": "Spacing bottom",
+      "Spacing top": "Spacing top",
+      "Theme": "Theme"
+    },
+    "zh": {
+      "Title name": "标题名称",
+      "Spacing bottom": "底部间距",
+      "Spacing top": "顶部间距",
+      "Theme": "主题"
+    }
+  }
+}

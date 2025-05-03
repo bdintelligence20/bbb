@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.material.mapper.MaterialMapper">
+    
+    <resultMap type="com.ruoyi.website.domain.vo.MaterialVO" id="MaterialResult">
+        <result property="materialId"    column="material_id"    />
+        <result property="type"    column="type"    />
+        <result property="model"    column="model"    />
+        <result property="fileName"    column="file_name"    />
+        <result property="fileType"    column="file_type"    />
+        <result property="materialPicsType"    column="material_pics_type"    />
+        <result property="downloadLink"    column="download_link"    />
+        <result property="baiduNetdisk"    column="baidu_netdisk"    />
+        <result property="date"    column="date"    />
+        <result property="content"    column="content"    />
+        <result property="format"    column="format"    />
+        <result property="market"    column="market"    />
+        <result property="qty"    column="qty"    />
+        <result property="firstScreenshot"    column="first_screenshot"    />
+        <result property="secondScreenshot"    column="second_screenshot"    />
+        <result property="thirdScreenshot"    column="third_screenshot"    />
+        <result property="viewMore"    column="view_more"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="status"       column="status"     />
+        <result property="picsType"     column="name"  />
+        <result property="newLabelFlag" column="new_label_flag"   />
+        <result property="userId" column="user_id" />
+    </resultMap>
+
+    <sql id="selectMaterialVo">
+        select material_id, type, model, file_name, file_type, material_pics_type, download_link, baidu_netdisk, date, content, format, market, qty, first_screenshot, second_screenshot, third_screenshot, view_more, create_time, status from material
+    </sql>
+
+    <select id="selectMaterialList" parameterType="Material" resultMap="MaterialResult">
+        <include refid="selectMaterialVo"/>
+        <where>  
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="model != null  and model != ''"> and model = #{model}</if>
+            <if test="fileName != null  and fileName != ''"> and file_name like concat('%', #{fileName}, '%')</if>
+            <if test="fileType != null  and fileType != ''"> and file_type = #{fileType}</if>
+            <if test="materialPicsType != null  and materialPicsType != ''"> and material_pics_type = #{materialPicsType}</if>
+            <if test="downloadLink != null  and downloadLink != ''"> and download_link = #{downloadLink}</if>
+            <if test="baiduNetdisk != null  and baiduNetdisk != ''"> and baidu_netdisk = #{baiduNetdisk}</if>
+            <if test="date != null  and date != ''"> and date = #{date}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="format != null  and format != ''"> and format = #{format}</if>
+            <if test="market != null  and market != ''"> and market = #{market}</if>
+            <if test="qty != null "> and qty = #{qty}</if>
+            <if test="firstScreenshot != null  and firstScreenshot != ''"> and first_screenshot = #{firstScreenshot}</if>
+            <if test="secondScreenshot != null  and secondScreenshot != ''"> and second_screenshot = #{secondScreenshot}</if>
+            <if test="thirdScreenshot != null  and thirdScreenshot != ''"> and third_screenshot = #{thirdScreenshot}</if>
+            <if test="viewMore != null  and viewMore != ''"> and view_more = #{viewMore}</if>
+            <if test="createTime != null "> and create_time = #{createTime}</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectMaterialByMaterialId" parameterType="Long" resultMap="MaterialResult">
+        select m.material_id, m.type, m.model, m.file_name, m.file_type,m.material_pics_type, m.download_link, m.baidu_netdisk, m.date, m.content, m.format, m.market, m.qty, m.first_screenshot, m.second_screenshot, m.third_screenshot, m.view_more, m.create_time,m.status
+        from material m
+        where m.material_id = #{materialId}
+    </select>
+    
+    <select id="selectMaterialByUserIdByMaterialId" parameterType="Long" resultType="Long">
+        select u.user_id
+        from material m
+        LEFT JOIN sys_user_material um on um.material_id = m.material_id
+        LEFT JOIN sys_user u on u.user_id = um.user_id
+        where m.material_id = #{materialId}
+    </select>
+        
+    <insert id="insertMaterial" parameterType="Material" useGeneratedKeys="true" keyProperty="materialId">
+        insert into material
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="type != null">type,</if>
+            <if test="model != null">model,</if>
+            <if test="fileName != null">file_name,</if>
+            <if test="fileType != null">file_type,</if>
+            <if test="materialPicsType != null">material_pics_type,</if>
+            <if test="downloadLink != null">download_link,</if>
+            <if test="baiduNetdisk != null">baidu_netdisk,</if>
+            <if test="date != null">date,</if>
+            <if test="content != null">content,</if>
+            <if test="format != null">format,</if>
+            <if test="market != null">market,</if>
+            <if test="qty != null">qty,</if>
+            <if test="firstScreenshot != null">first_screenshot,</if>
+            <if test="secondScreenshot != null">second_screenshot,</if>
+            <if test="thirdScreenshot != null">third_screenshot,</if>
+            <if test="viewMore != null">view_more,</if>
+            <if test="status != null">status,</if>
+            create_time
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="type != null">#{type},</if>
+            <if test="model != null">#{model},</if>
+            <if test="fileName != null">#{fileName},</if>
+            <if test="fileType != null">#{fileType},</if>
+            <if test="materialPicsType != null">#{materialPicsType},</if>
+            <if test="downloadLink != null">#{downloadLink},</if>
+            <if test="baiduNetdisk != null">#{baiduNetdisk},</if>
+            <if test="date != null">#{date},</if>
+            <if test="content != null">#{content},</if>
+            <if test="format != null">#{format},</if>
+            <if test="market != null">#{market},</if>
+            <if test="qty != null">#{qty},</if>
+            <if test="firstScreenshot != null">#{firstScreenshot},</if>
+            <if test="secondScreenshot != null">#{secondScreenshot},</if>
+            <if test="thirdScreenshot != null">#{thirdScreenshot},</if>
+            <if test="viewMore != null">#{viewMore},</if>
+            <if test="status != null">#{status},</if>
+            sysdate()
+         </trim>
+    </insert>
+
+    <update id="updateMaterial" parameterType="Material">
+        update material
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="type != null">type = #{type},</if>
+            <if test="model != null">model = #{model},</if>
+            <if test="fileName != null">file_name = #{fileName},</if>
+            <if test="fileType != null">file_type = #{fileType},</if>
+            <if test="materialPicsType != null">material_pics_type = #{materialPicsType},</if>
+            <if test="downloadLink != null">download_link = #{downloadLink},</if>
+            <if test="baiduNetdisk != null">baidu_netdisk = #{baiduNetdisk},</if>
+            <if test="date != null">date = #{date},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="format != null">format = #{format},</if>
+            <if test="market != null">market = #{market},</if>
+            <if test="qty != null">qty = #{qty},</if>
+            <if test="firstScreenshot != null">first_screenshot = #{firstScreenshot},</if>
+            <if test="secondScreenshot != null">second_screenshot = #{secondScreenshot},</if>
+            <if test="thirdScreenshot != null">third_screenshot = #{thirdScreenshot},</if>
+            <if test="viewMore != null">view_more = #{viewMore},</if>
+            <if test="status != null">status = #{status},</if>
+        </trim>
+        where material_id = #{materialId}
+    </update>
+
+    <delete id="deleteMaterialByMaterialId" parameterType="Long">
+        delete from material where material_id = #{materialId}
+    </delete>
+
+    <delete id="deleteMaterialByMaterialIds" parameterType="String">
+        delete from material where material_id in 
+        <foreach item="materialId" collection="array" open="(" separator="," close=")">
+            #{materialId}
+        </foreach>
+    </delete>
+
+    <select id="selectMaterial" parameterType="materialVo" resultMap="MaterialResult">
+        select m.material_id, m.type, m.model, m.file_name, m.file_type, m.material_pics_type, m.download_link, m.baidu_netdisk, m.date, m.content, m.format, m.market, m.qty, m.first_screenshot, m.second_screenshot, m.third_screenshot, m.view_more, m.create_time,m.new_label_flag
+        from material m
+            LEFT JOIN sys_user_material um on um.material_id = m.material_id
+            LEFT JOIN sys_user u on u.user_id = um.user_id
+        <where>
+            m.type = #{type}
+            and u.user_id = #{userId}
+            <if test="model != null "> and m.model = #{model}</if>
+            <if test="materialPicsType != null "> and m.material_pics_type = #{materialPicsType}</if>
+        </where>
+
+    </select>
+
+    <select id="selectMaterialByStatus" parameterType="MaterialVO" resultMap="MaterialResult">
+        select m.material_id, m.type, m.model, m.file_name, m.file_type,m.material_pics_type, m.download_link, m.baidu_netdisk, m.date, m.content, m.format, m.market, m.qty, m.first_screenshot, m.second_screenshot, m.third_screenshot, m.view_more, m.create_time,m.new_label_flag
+        from material m
+        where m.status = 0
+        and m.type = #{type}
+        <if test="model != null "> and m.model = #{model}</if>
+    </select>
+
+
+    <select id="selectMaterialListStatus" parameterType="materialVo" resultMap="MaterialResult">
+        select m.material_id, m.type, m.model, m.file_name, m.file_type, m.material_pics_type, m.download_link, m.baidu_netdisk, m.date, m.content, m.format, m.market, m.qty, m.first_screenshot, m.second_screenshot, m.third_screenshot, m.view_more, m.create_time,m.new_label_flag
+        from material m
+        where m.status = 0
+    </select>
+
+</mapper>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>BAIC test drive application</title>
+</head>
+<body>
+Dear Colleague:
+<p style="text-indent:2em;margin:0">Please check the test drive applications from users on the official website of BAIC
+    International.</p>
+<p style="text-indent:2em;margin:0">Please contact and follow up in time，Thanks.</p>
+<br/>
+<table border="1" style="border-collapse:collapse">
+    <tbody>
+    <tr>
+        <th>Country</th>
+        <td><span th:text="${country}"></span></td>
+    </tr>
+    <tr>
+        <th>Name</th>
+        <td><span th:text="${name}"></span></td>
+    </tr>
+    <tr>
+        <th>Gender</th>
+        <td><span th:text="${gender}"></span></td>
+    </tr>
+    <tr>
+        <th>E-mail</th>
+        <td><span th:text="${email}"></span></td>
+    </tr>
+    <tr>
+        <th>Phone</th>
+        <td><span th:text="${telephone}"></span></td>
+    </tr>
+    <tr>
+        <th>Test drive model</th>
+        <td><span th:text="${vehicle_name}"></span></td>
+    </tr>
+    </tbody>
+</table>
+<th:block th:include="mail/common :: footer"/>
+</body>
+</html>

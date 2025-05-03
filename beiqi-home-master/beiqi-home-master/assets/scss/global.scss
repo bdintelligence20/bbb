@@ -1,0 +1,509 @@
+ /**
+ * 通用css样式布局处理
+ */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+body {
+  font-size: $body-text-size;
+  line-height: 1.5;
+}
+
+ol,
+ul {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+// A链接样式设置
+a { text-decoration: none; color: $body-color;}
+ol, ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+button {
+  outline: none;
+  border: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  // vertical-align: middle
+  display: block;
+}
+// 最大宽度定义
+.max-1680, .max-1400, .max-1200 {
+  @include max-width;
+}
+.max-1680 {
+  max-width: $max-1680;
+}
+.max-1440 {
+  max-width: $max-1440;
+}
+.max-1200 {
+  max-width: $max-1200;
+}
+.max-600 {
+  max-width: $max-600;
+}
+
+ /** 基础通用 **/
+.pt5 {
+	padding-top: 5px;
+}
+.pl30 {
+  padding-left: 30px;
+}
+.pr30 {
+  padding-right: 30px;
+}
+.pr5 {
+	padding-right: 5px;
+}
+.pb5 {
+	padding-bottom: 5px;
+}
+.ma {
+  margin: 0 auto;
+}
+.mt2 {
+ margin-top: 2px;
+}
+.mt5 {
+	margin-top: 5px;
+}
+.mr5 {
+	margin-right: 5px;
+}
+.mb5 {
+	margin-bottom: 5px;
+}
+.mb8 {
+	margin-bottom: 8px;
+}
+.ml5 {
+	margin-left: 5px;
+}
+.mt10 {
+	margin-top: 10px;
+}
+.mt30 {
+ margin-top: 30px;
+}
+.mr10 {
+	margin-right: 10px;
+}
+.mb10 {
+	margin-bottom: 10px;
+}
+.ml10 {
+	margin-left: 10px;
+}
+.mt20 {
+	margin-top: 20px;
+}
+.mr20 {
+	margin-right: 20px;
+}
+.mb20 {
+	margin-bottom: 20px;
+}
+.ml20 {
+	margin-left: 20px;
+}
+.mb30 {
+ margin-bottom: 30px;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+div:focus {
+  outline: none;
+}
+
+.fr {
+  float: right;
+}
+
+.fl {
+  float: left;
+}
+
+.pr-5 {
+  padding-right: 5px;
+}
+
+.pl-5 {
+  padding-left: 5px;
+}
+
+.block {
+  display: block;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.inlineBlock {
+  display: inline-block;
+}
+
+.clf {
+  font-size: 0;
+  clear: both;
+  overflow: hidden;
+}
+
+.clearfix {
+  overflow: hidden;
+  &:after {
+      visibility: hidden;
+      display: block;
+      font-size: 0;
+      content: " ";
+      clear: both;
+      height: 0;
+  }
+}
+
+.h3 {
+  font-size: calc($body-text-size * 2);
+}
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+.text-center {
+  text-align: center;
+}
+.el-dialog:not(.is-fullscreen) {
+	margin-top: 6vh !important;
+}
+
+.visually-hidden{
+  clip:rect(0, 0, 0, 0);
+  overflow:hidden;
+  position:absolute;
+  height:1px;
+  width:1px;
+}
+
+.visually-invisible{
+  opacity:0 !important;
+}
+
+.el-menu--horizontal {
+  width: 100%;
+
+}
+
+::-webkit-scrollbar-track-piece {
+  background: #d3dce6;
+}
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #99a9bf;
+  border-radius: 20px;
+}
+.btn {
+  display: inline-block;
+  color: $btn-text-color;
+  padding: 10px 50px;
+  border-radius: 50px;
+  background-color: $themen-color;
+  line-height: normal;
+  font-size: $btn-font-size;
+  border: 1px solid $themen-color;
+  cursor: pointer;
+}
+.btn:hover {
+  background-color: transparent;
+  color: $body-color;
+  border: 1px solid $body-color;
+}
+.btn--small {
+  padding: 8px 30px;
+  font-size:calc($btn-font-size - 4px)
+}
+.secondary--btn-dark {
+  background-color: transparent;
+  color: #000;
+  border: 1px solid #000;
+}
+.secondary--btn-dark:hover {
+  background-color: $themen-color;
+  color: #fff;
+  border: 1px solid $themen-color;
+}
+.btn.secondary--btn {
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+}
+.btn.secondary--btn:hover {
+  background-color: $themen-color;
+  color: $btn-text-color;
+  border: 1px solid $themen-color;
+}
+.el-button {
+  color: $btn-text-color;
+  background-color: $themen-color;
+}
+.el-button:focus, .el-button:hover, .el-button:active {
+  background-color: transparent;
+  color: $body-color;
+  border-color: $body-color;
+}
+.el-btn--submit .el-form-item__content {
+  margin-left: 0 !important;
+  text-align: center;
+}
+@media only screen and (max-width:768px){
+  .btn {
+    padding: 6px 15px;
+    font-size: 12px;
+  }
+}
+.text-spacing {
+  margin-top: 12px;
+}
+.text-spacing-b {
+  margin-bottom: 12px;
+}
+//  rest element form style
+.el-input__inner {
+  background-color: $input-bgColor;
+  border: 0;
+  height: 50px;
+  line-height: 50px;
+}
+.el-textarea__inner {
+  background-color: $input-bgColor;
+  border: 0;
+}
+.el-select {
+  width: 100%;
+}
+.el-form-item {
+  margin-bottom: 35px;
+}
+
+.el-form-item.is-required:not(.is-no-asterisk) .el-form-item__label-wrap>.el-form-item__label:before, .el-form-item.is-required:not(.is-no-asterisk)>.el-form-item__label:before {
+  content: '';
+}
+.el-form-item.is-required:not(.is-no-asterisk) .el-form-item__label-wrap>.el-form-item__label::after, .el-form-item.is-required:not(.is-no-asterisk)>.el-form-item__label::after {
+  content: '*';
+  color: #F56C6C;
+  margin-left: 4px;
+}
+.el-dialog__wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.el-image__inner {
+  object-fit: cover;
+}
+
+label {
+  line-height: 1.5;
+  display: inline-block;
+}
+
+.product-nav__tabs {
+  .el-tabs__item.is-left {
+    text-align: left;
+    width: 200px;
+    padding-left: 0;
+  }
+  .el-tabs__active-bar {
+    display: none;
+  }
+  .el-tabs__nav-wrap.is-left::after {
+    display: none;
+  }
+}
+.el-table {
+  margin-top: 30px;
+  color: #000;
+}
+.el-table thead {
+  color: #000;
+}
+.el-pagination {
+  margin-top: 30px;
+}
+.el-pager li.active {
+  background-color: $themen-color!important;
+  color: #fff !important;
+}
+.el-pagination .el-pager li:not(.disabled):not(.active):hover,
+.el-pagination button:not(:disabled):hover{
+  color: $themen-color!important;
+}
+
+
+.section-title {
+  font-size: calc($body-text-size * 2);
+  padding-bottom: 20px;
+  padding-top: 20px;
+  font-weight: 500;
+}
+
+.home-section-title {
+  font-size: calc($body-text-size * 2);
+  padding: 3.125vw 0;
+  text-align: center;
+  color: #4a4a4a;
+  font-weight: 600;
+}
+
+.index-section {
+  margin-bottom: 60px;
+  margin-top: 60px;
+}
+// 省略显示 1 行文字
+.ellipsis1line {
+ overflow      : hidden;
+ white-space   : nowrap;
+ text-overflow : ellipsis;
+}
+
+// 省略显示 2 行文字
+.ellipsis2line {
+ text-overflow      : -o-ellipsis-lastline;
+ overflow           : hidden;
+ text-overflow      : ellipsis;
+ display            : -webkit-box;
+ -webkit-line-clamp : 2;
+ line-clamp         : 2;
+ -webkit-box-orient : vertical;
+ white-space        : normal;
+}
+
+// 省略显示 3 行文字
+.ellipsis3line {
+  text-overflow      : -o-ellipsis-lastline;
+  overflow           : hidden;
+  text-overflow      : ellipsis;
+  display            : -webkit-box;
+  -webkit-line-clamp : 3;
+  line-clamp         : 3;
+  -webkit-box-orient : vertical;
+  white-space        : normal;
+ }
+ // 省略显示 5 行文字
+.ellipsis5line {
+  text-overflow      : -o-ellipsis-lastline;
+  overflow           : hidden;
+  text-overflow      : ellipsis;
+  display            : -webkit-box;
+  -webkit-line-clamp : 5;
+  line-clamp         : 5;
+  -webkit-box-orient : vertical;
+  white-space        : normal;
+ }
+
+.el-drawer__body {
+  padding: 20px;
+  .el-collapse-item__content {
+    padding-left: 15px;
+  }
+}
+.el-collapse-item.is-disabled .el-collapse-item__header {
+  color: #000;
+  cursor: pointer;
+  .el-collapse-item__arrow {
+    display: none;
+  }
+}
+
+.g-html__wrapper {
+  margin-bottom: 40px;
+}
+
+.g-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+.g-flex-c {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.g-flex-b {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.g-container {
+  min-height: 100vh;
+}
+
+.el-tabs__item:hover, .el-tabs__item.is-active {
+  color: $themen-color;
+}
+
+.inner-drawer .el-drawer__close-btn {
+  display: none;
+}
+.el-collapse-item__car .el-collapse-item__arrow {
+  display: block !important;
+}
+.el-drawer__header {
+  margin-bottom: 0;
+}
+.el-carousel__indicators--horizontal {
+  width: 100%;
+  text-align: center;
+}
+.el-carousel__arrow {
+  background-color: rgba(0,0,0,.8);
+}
+.md,.xs,.sm {
+  .section-title {
+    font-size: calc($body-text-size * 1.7);
+  }
+  .home-section-title {
+    font-size: calc($body-text-size * 1.7);
+    padding: 30px 0;
+  }
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.website.mapper.AfterSaleContentLangMapper">
+    
+    <resultMap type="AfterSaleContentLang" id="AfterSaleContentLangResult">
+        <result property="id"    column="id"    />
+        <result property="saleContentId"    column="sale_content_id"    />
+        <result property="language"    column="language"    />
+        <result property="content"    column="content"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateBy"    column="update_by"    />
+    </resultMap>
+
+    <sql id="selectAfterSaleContentLangVo">
+        select id, sale_content_id, language, content, create_time, update_time, create_by, update_by from website_after_sale_content_lang
+    </sql>
+
+    <select id="selectAfterSaleContentLangList" parameterType="AfterSaleContentLang" resultMap="AfterSaleContentLangResult">
+        <include refid="selectAfterSaleContentLangVo"/>
+        <where>  
+            <if test="saleContentId != null "> and sale_content_id = #{saleContentId}</if>
+            <if test="language != null  and language != ''"> and language = #{language}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+        </where>
+    </select>
+    
+    <select id="selectAfterSaleContentLangById" parameterType="Long" resultMap="AfterSaleContentLangResult">
+        <include refid="selectAfterSaleContentLangVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertAfterSaleContentLang" parameterType="AfterSaleContentLang" useGeneratedKeys="true" keyProperty="id">
+        insert into website_after_sale_content_lang
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="saleContentId != null">sale_content_id,</if>
+            <if test="language != null">language,</if>
+            <if test="content != null">content,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateBy != null">update_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="saleContentId != null">#{saleContentId},</if>
+            <if test="language != null">#{language},</if>
+            <if test="content != null">#{content},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+         </trim>
+    </insert>
+
+    <update id="updateAfterSaleContentLang" parameterType="AfterSaleContentLang">
+        update website_after_sale_content_lang
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="saleContentId != null">sale_content_id = #{saleContentId},</if>
+            <if test="language != null">language = #{language},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteAfterSaleContentLangById" parameterType="Long">
+        delete from website_after_sale_content_lang where id = #{id}
+    </delete>
+
+    <delete id="deleteAfterSaleContentLangByIds" parameterType="String">
+        delete from website_after_sale_content_lang where id in 
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <delete id="deleteByContentId">
+        delete from website_after_sale_content_lang where sale_content_id in
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <insert id="batchInsert">
+        insert into website_after_sale_content_lang
+        (sale_content_id, `language`, content, create_time, update_time, create_by, update_by)
+        values
+        <foreach collection ="list" item="item" index="index" separator =",">
+            (#{item.saleContentId},
+            #{item.language},
+            #{item.content},
+            #{item.createTime},
+            #{item.updateTime},
+            #{item.createBy},
+            #{item.updateBy})
+        </foreach >
+    </insert>
+</mapper>

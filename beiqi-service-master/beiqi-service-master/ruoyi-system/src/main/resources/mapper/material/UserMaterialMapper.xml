@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.material.mapper.UserMaterialMapper">
+    
+    <resultMap type="UserMaterial" id="UserMaterialResult">
+        <result property="userId"    column="user_id"    />
+        <result property="materialId"    column="material_id"    />
+    </resultMap>
+
+    <sql id="selectUserMaterialVo">
+        select user_id, material_id from sys_user_material
+    </sql>
+
+    <select id="selectUserMaterialList" parameterType="UserMaterial" resultMap="UserMaterialResult">
+        <include refid="selectUserMaterialVo"/>
+        <where>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="materialId != null "> and material_id = #{materialId}</if>
+        </where>
+    </select>
+    
+    <select id="selectUserMaterialByUserId" parameterType="Long" resultMap="UserMaterialResult">
+        <include refid="selectUserMaterialVo"/>
+        where user_id = #{userId}
+    </select>
+        
+    <insert id="insertUserMaterial" parameterType="UserMaterial">
+        insert into sys_user_material
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="materialId != null">material_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="materialId != null">#{materialId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateUserMaterial" parameterType="UserMaterialVO">
+        update sys_user_material
+        set   material_id = #{newMaterialId}
+        where user_id = #{userId}
+        and material_id = #{materialId}
+    </update>
+
+    <delete id="deleteUserMaterialByUserId" parameterType="Long">
+        delete from sys_user_material where user_id = #{userId}
+    </delete>
+
+    <delete id="deleteUserMaterialByUserIds" parameterType="String">
+        delete from sys_user_material where user_id in 
+        <foreach item="userId" collection="array" open="(" separator="," close=")">
+            #{userId}
+        </foreach>
+    </delete>
+
+
+    <insert id="batchUserMaterial">
+        insert into sys_user_material(user_id, material_id) values
+        <foreach item="item" index="index" collection="list" separator=",">
+            (#{item.userId},#{item.materialId})
+        </foreach>
+    </insert>
+
+
+    <delete id="deleteAllByUserIdByMaterialId">
+        delete from sys_user_material where user_id = #{userId}
+        and material_id in
+        <foreach item="materialIds" collection="materialId" open="(" separator="," close=")">
+            #{materialIds}
+        </foreach>
+    </delete>
+
+    <delete id="deleteByMaterialId">
+        DELETE from sys_user_material where material_id = #{materialId}
+    </delete>
+</mapper>

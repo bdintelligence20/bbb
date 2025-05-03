@@ -1,0 +1,318 @@
+/**
+ * Author: SHI
+ * Date: 2022/6/20
+ * Remark: base
+ */
+.site-nav__dis { // 部分一级菜单禁用
+  pointer-events : none !important;
+  cursor         : default !important;
+}
+
+.lang___ar {
+  direction  : rtl;
+  text-align : right;
+  
+  .el-breadcrumb__item {
+    float : right;
+  }
+  
+  .history__page .el-timeline-item__tail {
+    left  : auto;
+    right : -7px;
+  }
+  
+  .el-timeline-item__node--normal {
+    left  : auto;
+    right : -12px;
+  }
+  
+  .history__page .box-card .box-card-time {
+    padding-right : 20px;
+    
+    .line {
+      margin-right : 65px !important;
+    }
+  }
+  
+  .cart-model-main {
+    .position-box {
+      text-align : left;
+    }
+  }
+}
+
+.lang___other {
+
+}
+
+.vue-tel-input {
+  border     : none !important;
+  background : #F8F8F8;
+  .vti__dropdown{
+    min-width: 100px;
+    .vti__flag.tw, .vti__flag.hk, .vti__flag.mo{
+      background-position: -1049px 0;
+    }
+    .vti__dropdown-list.below{
+      top   : 54px;
+      left  : 0;
+      right: 0;
+      width : 280px;
+
+      .vti__dropdown-item{
+        display: flex;
+      }
+    }
+
+    .vti__dropdown-list.above{
+      bottom: 100%;
+      left  : 0;
+      right: 0;
+      width : 280px;
+
+      .vti__dropdown-item{
+        display: flex;
+      }
+    }
+  }
+  .vti__input {
+    background : #F8F8F8;
+    
+    &::placeholder {
+      color : #C0C4CC;
+    }
+  }
+    
+  &:focus-within {
+    box-shadow : none !important;
+  }
+}
+
+.index-el-button.el-button {
+  font-size     : 16px;
+  border        : none;
+  border-radius : 4px;
+  
+  &:focus,
+  &:active {
+    color            : #fff;
+    background : #D1291A;
+  }
+  
+  &:hover {
+    border     : none;
+    background : #000;
+    color      : #fff;
+  }
+}
+
+.border-el-button.el-button{
+  background: transparent;
+  border        : 1px solid #000;
+  border-radius : 4px;
+  font-size     : 16px;
+  color: #000;
+  transform: scale(1);
+  transition: all 300ms ease-out;
+
+  &:hover{
+    transform: scale(1.1);
+    transition: all 300ms ease-out;
+  }
+
+  &.white{
+    border        : 1px solid #fff;
+    color: #fff;
+  }
+    
+}
+
+.border-button {
+  background: transparent;
+  border        : 1px solid #000;
+  border-radius : 4px;
+  color: #000;
+  transform: scale(1);
+  transition: all 300ms ease-out;
+
+  &:hover{
+    transform: scale(1.1);
+    transition: all 300ms ease-out;
+  }
+}
+
+
+
+
+// 移动端样式
+.main__layout {
+  
+  &.beiqi-moble,
+  &.xs,
+  &.sm {
+    // 新闻列表
+    .news__page {
+      .content-section {
+        .content-section__release {
+          .el-row {
+            .el-col.el-col-8 {
+              width : 100%;
+            }
+          }
+        }
+        
+        .content-section__others {
+          li {
+            .item-content {
+              flex-direction : column;
+              
+              .el-link {
+                align-self : flex-start;
+                margin-top : 20px;
+              }
+            }
+          }
+        }
+        
+        .content-section__media {
+          .item-content-column {
+            .el-row {
+              .el-col-3 {
+                width : 25%;
+              }
+              
+              > div {
+                height : auto;
+              }
+              
+              .el-col-21 {
+                width : 75%;
+                
+                > div {
+                  flex-direction : column;
+                  
+                  > div {
+                    &:first-of-type {
+                      padding : 0;
+                    }
+                    
+                    &:last-of-type {
+                      margin : 30px 0;
+                      width  : auto;
+                      height : auto;
+                    }
+                  }
+                }
+              }
+            }
+            
+            h3 {
+              line-height : 28px;
+            }
+            
+            p {
+              line-height : 20px;
+              margin-top  : 20px;
+            }
+            
+            .el-link {
+              margin-top : 0;
+            }
+          }
+        }
+      }
+    }
+    
+    // 历史
+    .history__page {
+      .box-card {
+        .box-card-time {
+          width : 170px;
+        }
+      }
+    }
+    
+    // 社会责任
+    .reports-list {
+      .reports-list-item {
+        &.el-col-8 {
+          width : 100%;
+        }
+      }
+    }
+    
+    // 下载中心
+    .multimedia__page {
+      .el-row {
+        .el-col.el-col-6 {
+          width : 100%;
+          
+          .img-video-box {
+            height : 100%;
+          }
+        }
+      }
+    }
+    
+  }
+}
+
+// 后台编辑文章的对齐样式
+.ql-align-center {
+  text-align : center;
+  
+  img {
+    display : inline-block;
+  }
+}
+
+.ql-align-right {
+  text-align : right;
+  text-align : end;
+  
+  img {
+    display : inline-block;
+  }
+}
+
+.ql-align-justify {
+  text-align : justify;
+  
+  img {
+    display : inline-block;
+  }
+}
+// 车型详情页文字样式
+.cart-model-main{
+  .subTitle{
+    overflow: hidden;
+    p{
+      max-width: 500px;
+      float: left;
+      word-break: break-word;
+      text-align: left;
+      font-size: 16px;
+    }
+  }
+}
+// 阿语部分样式
+.lang___ar{
+  .gallery{
+    .text__body{
+      text-align: right!important;
+    }
+  }
+  .swiper-container-rtl .swiper-button-prev{
+    right: auto!important;
+  }
+  .cart-model-main{
+    .subTitle{
+      p{
+        text-align: right;
+      }
+    }
+  }
+  .media-el-table{
+    direction: ltr;
+  }
+}

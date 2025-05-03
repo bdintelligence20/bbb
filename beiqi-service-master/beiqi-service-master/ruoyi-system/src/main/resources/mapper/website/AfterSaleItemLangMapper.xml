@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.website.mapper.AfterSaleItemLangMapper">
+    
+    <resultMap type="AfterSaleItemLang" id="AfterSaleItemLangResult">
+        <result property="id"    column="id"    />
+        <result property="saleItemId"    column="sale_item_id"    />
+        <result property="name"    column="name"    />
+        <result property="imageUrl"    column="image_url"    />
+        <result property="language"    column="language"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateBy"    column="update_by"    />
+    </resultMap>
+
+    <sql id="selectAfterSaleItemLangVo">
+        select id, sale_item_id, name, image_url, language, create_time, update_time, create_by, update_by from website_after_sale_item_lang
+    </sql>
+
+    <select id="selectAfterSaleItemLangList" parameterType="AfterSaleItemLang" resultMap="AfterSaleItemLangResult">
+        <include refid="selectAfterSaleItemLangVo"/>
+        <where>  
+            <if test="saleItemId != null "> and sale_item_id = #{saleItemId}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="imageUrl != null  and imageUrl != ''"> and image_url = #{imageUrl}</if>
+            <if test="language != null  and language != ''"> and language = #{language}</if>
+        </where>
+    </select>
+    
+    <select id="selectAfterSaleItemLangById" parameterType="Long" resultMap="AfterSaleItemLangResult">
+        <include refid="selectAfterSaleItemLangVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertAfterSaleItemLang" parameterType="AfterSaleItemLang" useGeneratedKeys="true" keyProperty="id">
+        insert into website_after_sale_item_lang
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="saleItemId != null">sale_item_id,</if>
+            <if test="name != null">name,</if>
+            <if test="imageUrl != null">image_url,</if>
+            <if test="language != null">language,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateBy != null">update_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="saleItemId != null">#{saleItemId},</if>
+            <if test="name != null">#{name},</if>
+            <if test="imageUrl != null">#{imageUrl},</if>
+            <if test="language != null">#{language},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+         </trim>
+    </insert>
+
+    <update id="updateAfterSaleItemLang" parameterType="AfterSaleItemLang">
+        update website_after_sale_item_lang
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="saleItemId != null">sale_item_id = #{saleItemId},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="imageUrl != null">image_url = #{imageUrl},</if>
+            <if test="language != null">language = #{language},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteAfterSaleItemLangById" parameterType="Long">
+        delete from website_after_sale_item_lang where id = #{id}
+    </delete>
+
+    <delete id="deleteAfterSaleItemLangByItemId" parameterType="String">
+        delete from website_after_sale_item_lang where sale_item_id in
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <delete id="deleteAfterSaleItemLangByIds" parameterType="String">
+        delete from website_after_sale_item_lang where id in 
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <insert id="batchInsert">
+        insert into website_after_sale_item_lang
+        ( sale_item_id, `name`, image_url, `language`, create_time, update_time, create_by, update_by)
+        values
+        <foreach collection ="list" item="item" index="index" separator =",">
+            (#{item.saleItemId},
+            #{item.name},
+            #{item.imageUrl},
+            #{item.language},
+            #{item.createTime},
+            #{item.updateTime},
+            #{item.createBy},
+            #{item.updateBy})
+        </foreach >
+    </insert>
+</mapper>

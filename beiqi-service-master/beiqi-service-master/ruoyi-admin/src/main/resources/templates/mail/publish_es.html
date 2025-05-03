@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>¡Actualización de noticias de su sitio web BAIC suscrito!</title>
+</head>
+<body>
+<div>
+    Querido:
+    <p style="text-indent:2em;margin:0">¡Actualización de noticias del sitio web oficial de BAIC International! ,
+        descrita
+        brevemente
+        de la siguiente manera:</p>
+    [[${newsTitle}]]
+    <br/>
+    [[${#dates.format(newsPublishTime,'yyyy-MM-dd')}]]
+    <br/>
+    [[${newsSummarize}]]
+    <br/>
+    También puede ir rápidamente y comprobarlo en <a
+        th:href="@{https://www.baicglobal.com/es/news/newsRelease/detail/{id}(id=${newsId})}"><span>[[${newsTitle}]]</span></a>.
+</div>
+<th:block th:include="mail/common :: footer"/>
+</body>
+</html>

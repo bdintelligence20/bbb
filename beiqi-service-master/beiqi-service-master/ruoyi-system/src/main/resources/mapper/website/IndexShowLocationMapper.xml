@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.website.mapper.IndexShowLocationMapper">
+    
+    <resultMap type="IndexShowLocation" id="IndexShowLocationResult">
+        <result property="id"    column="id"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateBy"    column="update_by"    />
+    </resultMap>
+
+    <sql id="selectIndexShowLocationVo">
+        select id, create_time, update_time, create_by, update_by from website_index_show_location
+    </sql>
+
+    <select id="selectIndexShowLocationList" resultType="com.ruoyi.website.domain.vo.IndexShowLocationVO">
+        select
+        sl.id, sl.create_time as createTime, ll.id as indexLangId, ll.title, ll.describe, ll.video_url as videoUrl,
+        ll.image_url as imageUrl, ll.link_url as linkUrl, ll.type, ll.language, ll.aspect_ratio as aspectRatio
+        from website_index_show_location as sl
+        left join website_index_show_location_lang as ll on sl.id = ll.index_id
+        where ll.language = #{lang}
+        order by sl.create_time desc
+    </select>
+    
+    <select id="selectIndexShowLocationById" parameterType="Long" resultType="com.ruoyi.website.domain.vo.IndexShowLocationVO">
+        select
+        sl.id, sl.create_time as createTime, ll.id as indexLangId, ll.title, ll.describe, ll.video_url as videoUrl,
+        ll.image_url as imageUrl, ll.link_url as linkUrl, ll.type, ll.language, ll.aspect_ratio as aspectRatio
+        from website_index_show_location as sl
+        left join website_index_show_location_lang as ll on sl.id = ll.index_id
+        where sl.id = #{id}
+    </select>
+        
+    <insert id="insertIndexShowLocation" parameterType="IndexShowLocation" useGeneratedKeys="true" keyProperty="id">
+        insert into website_index_show_location
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateBy != null">update_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+         </trim>
+    </insert>
+
+    <update id="updateIndexShowLocation" parameterType="IndexShowLocation">
+        update website_index_show_location
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteIndexShowLocationById" parameterType="Long">
+        delete from website_index_show_location where id = #{id}
+    </delete>
+
+    <delete id="deleteIndexShowLocationByIds" parameterType="String">
+        delete from website_index_show_location where id in 
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,20 @@
+{
+  "name": "md-news-image-text-inverted-l",
+  "label": "Image And Text Like A Inverted \"L\"",
+  "version": "0.0.80",
+  "description": "\"倒L\"图文混排布局",
+  "main": "index.js",
+  "module": true,
+  "editable": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+  },
+  "keywords": [
+    "title"
+  ],
+  "poster": "",
+  "author": "Hipop",
+  "license": "ISC"
+}

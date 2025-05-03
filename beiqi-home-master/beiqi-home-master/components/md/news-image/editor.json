@@ -1,0 +1,36 @@
+{
+  "formItems": [
+    {
+      "type": "img-uploader",
+      "elFormItemProps": {
+        "prop": "image",
+        "label": "Image"
+      },
+      "elFormItemChildProps": {
+        "placeholder": "place input the large img src"
+      }
+    },
+    {
+      "type": "el-switch",
+      "elFormItemProps": {
+        "prop": "darkTheme",
+        "label": "Theme"
+      },
+      "elFormItemChildProps": {
+        "active-text": "Dark theme",
+        "inactive-text": "Bright color theme",
+        "@change": "handleSubmit"
+      }
+    }
+  ],
+  "i18n": {
+    "en": {
+      "Image": "Image",
+      "Theme": "Theme"
+    },
+    "zh": {
+      "Image": "图片",
+      "Theme": "主题"
+    }
+  }
+}

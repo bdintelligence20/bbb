@@ -1,0 +1,23 @@
+.ed-news-content {
+    font-size: 18px;
+    line-height: 1.5;
+    font-family: -apple-system, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif, STHeiti, "Microsoft YaHei", Arial;
+
+    p {
+        margin: 0;
+    }
+}
+.ed-news-content.ed-dir-rtl {
+    direction: ltr;
+}
+
+.dark-theme {
+  background: #262626;
+  color: #fff;
+}
+
+@media only screen and (max-width: 767px) {
+    .ed-news-content {
+        font-size: 14px;
+    }
+}

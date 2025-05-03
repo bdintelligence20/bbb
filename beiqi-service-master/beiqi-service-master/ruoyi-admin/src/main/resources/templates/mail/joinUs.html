@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>BAIC国际官网用户求职信息</title>
+</head>
+<body>
+亲爱的同事：
+<p style="text-indent:2em;margin:0">BAIC国际官网收到一封求职信息，详细信息见下文，也请及时跟进：</p>
+<br/>
+<table border="1" style="border-collapse: collapse;">
+    <tr>
+        <th>Job Title
+        <td>[[${jobTitle}]]</td>
+        </th>
+    </tr>
+    <tr>
+        <th>Full Name
+        <td>[[${fullName}]]</td>
+        </th>
+    </tr>
+    <tr>
+        <th>Nationality
+        <td>[[${nationality}]]</td>
+        </th>
+    </tr>
+    <tr>
+        <th>Email
+        <td>[[${email}]]</td>
+        </th>
+    </tr>
+    <tr>
+        <th>Phone
+        <td>[[${phone}]]</td>
+        </th>
+    </tr>
+    <tr>
+        <th>Current Country
+        <td>[[${currCountry}]]</td>
+        </th>
+    </tr>
+    <tr>
+        <th>Current Company
+        <td>[[${currCompany}]]</td>
+        </th>
+    </tr>
+    <tr>
+        <th>Resume/CV
+        <td><a th:href="${resumeUrl}">简历附件</a></td>
+        </th>
+    </tr>
+</table>
+<th:block th:include="mail/common :: footer"/>
+</body>
+</html>

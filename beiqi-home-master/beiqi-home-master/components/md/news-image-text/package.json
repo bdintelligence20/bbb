@@ -1,0 +1,20 @@
+{
+  "name": "md-news-image-text",
+  "label": "Image And Text",
+  "version": "0.0.80",
+  "description": "图文混排模块",
+  "main": "index.js",
+  "module": true,
+  "editable": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+  },
+  "keywords": [
+    "title"
+  ],
+  "poster": "",
+  "author": "Hipop",
+  "license": "ISC"
+}

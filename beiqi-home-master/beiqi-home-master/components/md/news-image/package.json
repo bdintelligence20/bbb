@@ -1,0 +1,20 @@
+{
+  "name": "md-news-image",
+  "label": "Normal Image",
+  "version": "0.0.80",
+  "description": "普通图片",
+  "main": "index.js",
+  "module": true,
+  "editable": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+  },
+  "keywords": [
+    "news image"
+  ],
+  "poster": "",
+  "author": "Hipop",
+  "license": "ISC"
+}

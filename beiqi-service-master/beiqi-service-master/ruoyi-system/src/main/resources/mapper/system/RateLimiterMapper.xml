@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.RateLimiterMapper">
+    
+    <resultMap type="RateLimiters" id="RateLimiterResult">
+        <result property="id"    column="id"    />
+        <result property="time"    column="time"    />
+        <result property="count"    column="count"    />
+        <result property="method"    column="method"    />
+        <result property="name"     column="name"    />
+    </resultMap>
+
+    <sql id="selectRateLimiterVo">
+        select id, name, time, count, method from rate_limiter
+    </sql>
+
+    <select id="selectRateLimiterList" parameterType="RateLimiters" resultMap="RateLimiterResult">
+        <include refid="selectRateLimiterVo"/>
+        <where>
+            <if test="name != null and name != ''">and name = #{name}</if>
+            <if test="time != null and time = 0"> and time = #{time}</if>
+            <if test="count != null and count = 0"> and count = #{count}</if>
+            <if test="method != null  and method != ''"> and method = #{method}</if>
+        </where>
+    </select>
+    
+    <select id="selectRateLimiterById" parameterType="Long" resultMap="RateLimiterResult">
+        <include refid="selectRateLimiterVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="getRateLimiter" parameterType="String" resultMap="RateLimiterResult">
+        <include refid="selectRateLimiterVo"/>
+        where method = #{method}
+    </select>
+        
+    <insert id="insertRateLimiter" parameterType="RateLimiters" useGeneratedKeys="true" keyProperty="id">
+        insert into rate_limiter
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">name,</if>
+            <if test="time != null">time,</if>
+            <if test="count != null">count,</if>
+            <if test="method != null">method,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">#{name}</if>
+            <if test="time != null">#{time},</if>
+            <if test="count != null">#{count},</if>
+            <if test="method != null">#{method},</if>
+         </trim>
+    </insert>
+
+    <update id="updateRateLimiter" parameterType="RateLimiters">
+        update rate_limiter
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name}</if>
+            <if test="time != null">time = #{time},</if>
+            <if test="count != null">count = #{count},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteRateLimiterById" parameterType="Long">
+        delete from rate_limiter where id = #{id}
+    </delete>
+
+    <delete id="deleteRateLimiterByIds" parameterType="String">
+        delete from rate_limiter where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,554 @@
+{
+  "md-news-image": {
+    "formItems": [
+      {
+        "type": "editor-form-img-uploader",
+        "elFormItemProps": {
+          "prop": "image",
+          "label": "Image"
+        },
+        "elFormItemChildProps": {
+          "placeholder": "place input the large img src",
+          "@change": "handleSubmit"
+        }
+      },
+      {
+        "type": "el-switch",
+        "elFormItemProps": {
+          "prop": "darkTheme",
+          "label": "Theme"
+        },
+        "elFormItemChildProps": {
+          "active-text": "Dark theme",
+          "inactive-text": "Bright color theme",
+          "@change": "handleSubmit"
+        }
+      }
+    ],
+    "i18n": {
+      "en": {
+        "Image": "Image",
+        "Theme": "Theme"
+      },
+      "zh": {
+        "Image": "图片",
+        "Theme": "主题"
+      }
+    }
+  },
+  "md-news-image-full": {
+    "formItems": [
+      {
+        "type": "editor-form-img-uploader",
+        "elFormItemProps": {
+          "prop": "image",
+          "label": "Image"
+        },
+        "elFormItemChildProps": {
+          "placeholder": "place input the large img src",
+          "@change": "handleSubmit"
+        }
+      },
+      {
+        "type": "el-switch",
+        "elFormItemProps": {
+          "prop": "darkTheme",
+          "label": "Theme"
+        },
+        "elFormItemChildProps": {
+          "active-text": "Dark theme",
+          "inactive-text": "Bright color theme",
+          "@change": "handleSubmit"
+        }
+      }
+    ],
+    "i18n": {
+      "en": {
+        "Image": "Image",
+        "Theme": "Theme"
+      },
+      "zh": {
+        "Image": "图片",
+        "Theme": "主题"
+      }
+    }
+  },
+  "md-news-image-large": {
+    "defaultValue": {
+      "textPicSpace": 1
+    },
+    "formItems": [
+      {
+        "type": "editor-form-img-uploader",
+        "elFormItemProps": {
+          "prop": "image",
+          "label": "Image"
+        },
+        "elFormItemChildProps": {
+          "placeholder": "place input the img src",
+          "@change": "handleSubmit"
+        }
+      },
+      {
+        "type": "editor-form-style-text-input",
+        "elFormItemProps": {
+          "prop": "text",
+          "label": "Text content"
+        },
+        "elFormItemChildProps": {
+          "placeholder": "Please enter the Text content",
+          "defaultValue": "Please enter the Text content",
+          "@change": "handleSubmit"
+        }
+      },
+      {
+        "type": "el-slider",
+        "elFormItemProps": {
+          "prop": "textPicSpace",
+          "label": "Spacing between content and images"
+        },
+        "elFormItemChildProps": {
+          "placeholder": "place input the spacing",
+          ":step": "0.1",
+          ":min": 0,
+          ":max": 10,
+          "style": "margin: 0 1em;",
+          "@input": "handleSubmit",
+          "@change": "handleSubmit"
+        }
+      },
+      {
+        "type": "el-switch",
+        "elFormItemProps": {
+          "prop": "darkTheme",
+          "label": "Theme"
+        },
+        "elFormItemChildProps": {
+          "active-text": "Dark theme",
+          "inactive-text": "Bright color theme",
+          "@change": "handleSubmit"
+        }
+      }
+    ],
+    "i18n": {
+      "en": {
+        "Image": "Image",
+        "Text content": "Text content",
+        "Content reverse": "Content reverse",
+        "Spacing between content and images": "Spacing between content and images",
+        "Theme": "Theme"
+      },
+      "zh": {
+        "Image": "图片",
+        "Text content": "文本内容",
+        "Content reverse": "左右反转",
+        "Spacing between content and images": "内容和图片的间距",
+        "Theme": "主题"
+      }
+    }
+  },
+  "md-news-image-text-3columns": {
+    "defaultValue": {
+      "textPicSpace": 1
+    },
+    "formItems": [
+      {
+        "type": "editor-form-img-uploader",
+        "elFormItemProps": {
+          "prop": "image1",
+          "label": "Image 1"
+        },
+        "elFormItemChildProps": {
+          "placeholder": "place input the img src",
+          "@change": "handleSubmit"
+        }
+      },
+      {
+        "type": "editor-form-style-text-input",
+        "elFormItemProps": {
+          "prop": "text1",
+          "label": "Text 1 content"
+        },
+        "elFormItemChildProps": {
+          "placeholder": "Please enter the Text content",
+          "defaultValue": "Please enter the Text content",
+          "@change": "handleSubmit"
+        }
+      },
+      {
+        "type": "editor-form-img-uploader",
+        "elFormItemProps": {
+          "prop": "image2",
+          "label": "Image 2"
+        },
+        "elFormItemChildProps": {
+          "placeholder": "place input the img src",
+          "@change": "handleSubmit"
+        }
+      },
+      {
+        "type": "editor-form-style-text-input",
+        "elFormItemProps": {
+          "prop": "text2",
+          "label": "Text 2 content"
+        },
+        "elFormItemChildProps": {
+          "placeholder": "Please enter the Text content",
+          "defaultValue": "Please enter the Text content",
+          "@change": "handleSubmit"
+        }
+      },
+      {
+        "type": "editor-form-img-uploader",
+        "elFormItemProps": {
+          "prop": "image3",
+          "label": "Image 3"
+        },
+        "elFormItemChildProps": {
+          "placeholder": "place input the img src",
+          "@change": "handleSubmit"
+        }
+      },
+      {
+        "type": "editor-form-style-text-input",
+        "elFormItemProps": {
+          "prop": "text3",
+          "label": "Text 3 content"
+        },
+        "elFormItemChildProps": {
+          "placeholder": "Please enter the Text content",
+          "defaultValue": "Please enter the Text content",
+          "@change": "handleSubmit"
+        }
+      },
+      {
+        "type": "el-slider",
+        "elFormItemProps": {
+          "prop": "textPicSpace",
+          "label": "Spacing between content and images",
+          "Content reverse": "Content reverse"
+        },
+        "elFormItemChildProps": {
+          "placeholder": "place input the spacing",
+          ":step": "0.1",
+          ":min": 0,
+          ":max": 10,
+          "style": "margin: 0 1em;",
+          "@input": "handleSubmit",
+          "@change": "handleSubmit"
+        }
+      },
+      {
+        "type": "el-switch",
+        "elFormItemProps": {
+          "prop": "darkTheme",
+          "label": "Theme"
+        },
+        "elFormItemChildProps": {
+          "active-text": "Dark theme",
+          "inactive-text": "Bright color theme",
+          "@change": "handleSubmit"
+        }
+      }
+    ],
+    "i18n": {
+      "en": {
+        "Image 1": "Image 1",
+        "Text 1 content": "Text content",
+        "Image 2": "Image 2",
+        "Text 2 content": "Text content",
+        "Image 3": "Image 3",
+        "Text 3 content": "Text content",
+        "Spacing between content and images": "Spacing between content and images",
+        "Theme": "Theme"
+      },
+      "zh": {
+        "Image 1": "图片1",
+        "Text 1 content": "文本内容1",
+        "Image 2": "图片2",
+        "Text 2 content": "文本内容2",
+        "Image 3": "图片3",
+        "Text 3 content": "文本内容3",
+        "Spacing between content and images": "内容和图片的间距",
+        "Theme": "主题"
+      }
+    }
+  },
+  "md-news-image-text-inverted-l": {
+    "formItems": [
+      {
+        "type": "editor-form-style-text-input",
+        "elFormItemProps": {
+          "prop": "title",
+          "label": "Title Text"
+        },
+        "elFormItemChildProps": {
+          "placeholder": "Please enter the Text content",
+          "defaultValue": "Here is the title title",
+          "@change": "handleSubmit"
+        }
+      },
+      {
+        "type": "editor-form-style-text-input",
+        "elFormItemProps": {
+          "prop": "content",
+          "label": "Content Text"
+        },
+        "elFormItemChildProps": {
+          "placeholder": "Please enter the Text content",
+          "defaultValue": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fringilla, quam ut consequat suscipit, mauris felis venenatis lectus, at ultrices est leo vel justo. Praesent vitae erat non velit vehicula blandit. Maecenas sed condimentum dui. Vivamus malesuada, lacus eu aliquet dignissim, odio enim vestibulum ante.",
+          "@change": "handleSubmit"
+        }
+      },
+      {
+        "type": "editor-form-img-uploader",
+        "elFormItemProps": {
+          "prop": "imageLarge",
+          "label": "Large Image"
+        },
+        "elFormItemChildProps": {
+          "placeholder": "place input the img src",
+          "@change": "handleSubmit"
+        }
+      },
+      {
+        "type": "editor-form-img-uploader",
+        "elFormItemProps": {
+          "prop": "imageSmall1",
+          "label": "Small Image 1"
+        },
+        "elFormItemChildProps": {
+          "placeholder": "place input the img src",
+          "@change": "handleSubmit"
+        }
+      },
+      {
+        "type": "editor-form-img-uploader",
+        "elFormItemProps": {
+          "prop": "imageSmall2",
+          "label": "Small Image 2"
+        },
+        "elFormItemChildProps": {
+          "placeholder": "place input the img src",
+          "@change": "handleSubmit"
+        }
+      },
+      {
+        "type": "el-switch",
+        "elFormItemProps": {
+          "prop": "darkTheme",
+          "label": "Theme"
+        },
+        "elFormItemChildProps": {
+          "active-text": "Dark theme",
+          "inactive-text": "Bright color theme",
+          "@change": "handleSubmit"
+        }
+      }
+    ],
+    "i18n": {
+      "en": {
+        "Title Text": "Title Text",
+        "Content Text": "Content Text",
+        "Large Image": "Large Image",
+        "Small Image 1": "Small Image 1",
+        "Small Image 2": "Small Image 2",
+        "Theme": "Theme"
+      },
+      "zh": {
+        "Title Text": "标题文本",
+        "Content Text": "内容文本",
+        "Large Image": "大图",
+        "Small Image 1": "小图 1",
+        "Small Image 2": "小图 2",
+        "Theme": "主题"
+      }
+    }
+  },
+  "md-news-text": {
+    "formItems": [
+      {
+        "type": "editor-form-style-text-input",
+        "elFormItemProps": {
+          "prop": "text",
+          "label": "Text content"
+        },
+        "elFormItemChildProps": {
+          "placeholder": "Please enter the Text content",
+          "defaultValue": "Xxxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx x. \n Xxxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx x. ",
+          "@change": "handleSubmit"
+        }
+      },
+      {
+        "type": "el-switch",
+        "elFormItemProps": {
+          "prop": "darkTheme",
+          "label": "Theme"
+        },
+        "elFormItemChildProps": {
+          "active-text": "Dark theme",
+          "inactive-text": "Bright color theme",
+          "@change": "handleSubmit"
+        }
+      }
+    ],
+    "i18n": {
+      "en": {
+        "Text content": "Text content",
+        "Theme": "Theme"
+      },
+      "zh": {
+        "Text content": "文本内容",
+        "Theme": "主题"
+      }
+    }
+  },
+  "md-news-text-z": {
+    "formItems": [
+      {
+        "type": "editor-form-style-text-input",
+        "elFormItemProps": {
+          "prop": "text1",
+          "label": "Text content 1"
+        },
+        "elFormItemChildProps": {
+          "placeholder": "Please enter the Text content",
+          "defaultValue": "xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx ",
+          "@change": "handleSubmit"
+        }
+      },
+      {
+        "type": "editor-form-style-text-input",
+        "elFormItemProps": {
+          "prop": "text2",
+          "label": "Text content 2"
+        },
+        "elFormItemChildProps": {
+          "placeholder": "Please enter the Text content",
+          "defaultValue": "xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx ",
+          "@change": "handleSubmit"
+        }
+      },
+      {
+        "type": "el-switch",
+        "elFormItemProps": {
+          "prop": "reverse",
+          "label": "Content reverse"
+        },
+        "elFormItemChildProps": {
+          "active-text": "Z-sharp",
+          "inactive-text": "Reverse Z-sharp",
+          "@change": "handleSubmit"
+        }
+      },
+      {
+        "type": "el-switch",
+        "elFormItemProps": {
+          "prop": "darkTheme",
+          "label": "Theme"
+        },
+        "elFormItemChildProps": {
+          "active-text": "Dark theme",
+          "inactive-text": "Bright color theme",
+          "@change": "handleSubmit"
+        }
+      }
+    ],
+    "i18n": {
+      "en": {
+        "Text content 1": "Text content 1",
+        "Text content 2": "Text content 2",
+        "Text content": "Text content",
+        "Content reverse": "Content reverse",
+        "Theme": "Theme"
+      },
+      "zh": {
+        "Text content 1": "文本内容1",
+        "Text content 2": "文本内容2",
+        "Text content": "文本内容",
+        "Content reverse": "左右反转",
+        "Theme": "主题"
+      }
+    }
+  },
+  "md-news-title": {
+    "defaultValue": {
+      "title": {
+        "value": "Please enter the title"
+      },
+      "scpaceTop": 1,
+      "scpaceBottom": 1
+    },
+    "formItems": [
+      {
+        "type": "editor-form-style-text-input",
+        "elFormItemProps": {
+          "prop": "title",
+          "label": "Title name"
+        },
+        "elFormItemChildProps": {
+          "placeholder": "Please enter the title",
+          "@change": "handleSubmit"
+        }
+      },
+      {
+        "type": "el-slider",
+        "elFormItemProps": {
+          "prop": "scpaceTop",
+          "label": "Spacing top"
+        },
+        "elFormItemChildProps": {
+          "placeholder": "place input the spacing",
+          ":step": "0.1",
+          ":min": 0,
+          ":max": 10,
+          "style": "margin: 0 1em;",
+          "@input": "handleSubmit",
+          "@change": "handleSubmit"
+        }
+      },
+      {
+        "type": "el-slider",
+        "elFormItemProps": {
+          "prop": "scpaceBottom",
+          "label": "Spacing bottom"
+        },
+        "elFormItemChildProps": {
+          "placeholder": "place input the spacing",
+          ":step": "0.1",
+          ":min": 0,
+          ":max": 10,
+          "style": "margin: 0 1em;",
+          "@input": "handleSubmit",
+          "@change": "handleSubmit"
+        }
+      },
+      {
+        "type": "el-switch",
+        "elFormItemProps": {
+          "prop": "darkTheme",
+          "label": "Theme"
+        },
+        "elFormItemChildProps": {
+          "active-text": "Dark theme",
+          "inactive-text": "Bright color theme",
+          "@change": "handleSubmit"
+        }
+      }
+    ],
+    "i18n": {
+      "en": {
+        "Title name": "Title name",
+        "Spacing bottom": "Spacing bottom",
+        "Spacing top": "Spacing top",
+        "Theme": "Theme"
+      },
+      "zh": {
+        "Title name": "标题名称",
+        "Spacing bottom": "底部间距",
+        "Spacing top": "顶部间距",
+        "Theme": "主题"
+      }
+    }
+  }
+}

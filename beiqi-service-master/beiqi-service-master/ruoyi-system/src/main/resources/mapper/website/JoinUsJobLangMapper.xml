@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.website.mapper.JoinUsJobLangMapper">
+    
+    <resultMap type="JoinUsJobLang" id="JoinUsJobLangResult">
+        <result property="id"    column="id"    />
+        <result property="jobTitleId"    column="job_title_id"    />
+        <result property="areaId"    column="area_id"    />
+        <result property="categoryId"    column="category_id"    />
+        <result property="jobTitle"    column="job_title"    />
+        <result property="department"    column="department"    />
+        <result property="type"    column="type"    />
+
+        <result property="categoryName"    column="category_name"    />
+        <result property="areaName"    column="area_name"    />
+
+        <result property="numb"    column="numb"    />
+        <result property="language"    column="language"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateBy"    column="update_by"    />
+    </resultMap>
+
+    <sql id="selectJoinUsJobLangVo">
+        select id, job_title_id, area_id, category_id, job_title, department, type, numb, language, create_time, category_name,area_name
+        update_time, create_by, update_by from website_join_us_job_lang
+    </sql>
+
+    <select id="selectJoinUsJobLangList" parameterType="JoinUsJobLang" resultMap="JoinUsJobLangResult">
+        <include refid="selectJoinUsJobLangVo"/>
+        <where>  
+            <if test="jobTitleId != null "> and job_title_id = #{jobTitleId}</if>
+            <if test="areaId != null  and areaId != ''"> and area_id = #{areaId}</if>
+            <if test="categoryId != null  and categoryId != ''"> and category_id = #{categoryId}</if>
+            <if test="jobTitle != null  and jobTitle != ''"> and job_title = #{jobTitle}</if>
+            <if test="department != null  and department != ''"> and department = #{department}</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="numb != null "> and numb = #{numb}</if>
+            <if test="language != null  and language != ''"> and language = #{language}</if>
+            <if test="categoryName != null and categoryName != ''"> and category_name = #{categoryName}</if>
+            <if test="areaName != null  and areaName != ''"> and area_name = #{areaName}</if>
+        </where>
+    </select>
+    
+    <select id="selectJoinUsJobLangById" parameterType="Long" resultMap="JoinUsJobLangResult">
+        <include refid="selectJoinUsJobLangVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertJoinUsJobLang" parameterType="JoinUsJobLang" useGeneratedKeys="true" keyProperty="id">
+        insert into website_join_us_job_langd
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="jobTitleId != null">job_title_id,</if>
+            <if test="areaId != null">area_id,</if>
+            <if test="categoryId != null">category_id,</if>
+            <if test="jobTitle != null">job_title,</if>
+            <if test="department != null">department,</if>
+            <if test="type != null">type,</if>
+            <if test="numb != null">numb,</if>
+            <if test="language != null">language,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="categoryName != null">category_name,</if>
+            <if test="areaName != null">area_name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="jobTitleId != null">#{jobTitleId},</if>
+            <if test="areaId != null">#{areaId},</if>
+            <if test="categoryId != null">#{categoryId},</if>
+            <if test="jobTitle != null">#{jobTitle},</if>
+            <if test="department != null">#{department},</if>
+            <if test="type != null">#{type},</if>
+            <if test="numb != null">#{numb},</if>
+            <if test="language != null">#{language},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="categoryName != null">#{categoryName},</if>
+            <if test="areaName != null">#{areaName},</if>
+         </trim>
+    </insert>
+
+    <update id="updateJoinUsJobLang" parameterType="JoinUsJobLang">
+        update website_join_us_job_lang
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="jobTitleId != null">job_title_id = #{jobTitleId},</if>
+            <if test="areaId != null">area_id = #{areaId},</if>
+            <if test="categoryId != null">category_id = #{categoryId},</if>
+            <if test="jobTitle != null">job_title = #{jobTitle},</if>
+            <if test="department != null">department = #{department},</if>
+            <if test="type != null">type = #{type},</if>
+            <if test="numb != null">numb = #{numb},</if>
+            <if test="language != null">language = #{language},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="categoryName != null">category_name = #{categoryName},</if>
+            <if test="areaName != null">area_name = #{areaName},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteJoinUsJobLangById" parameterType="Long">
+        delete from website_join_us_job_lang where id = #{id}
+    </delete>
+
+    <delete id="deleteJoinUsJobLangByIds" parameterType="String">
+        delete from website_join_us_job_lang where id in 
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <insert id="batchInsert">
+        insert into website_join_us_job_lang
+        (job_title_id, area_id, category_id, job_title, department, `type`, numb,
+        `language`, create_time,category_name,area_name)
+        values
+        <foreach collection ="list" item="item" index="index" separator =",">
+            (#{item.jobTitleId},
+            #{item.areaId},
+            #{item.categoryId},
+            #{item.jobTitle},
+            #{item.department},
+            #{item.type},
+            #{item.numb},
+            #{item.language},
+            #{item.createTime},
+            #{item.categoryName},
+            #{item.areaName})
+        </foreach >
+    </insert>
+
+    <delete id="deleteByJobTitleIds">
+        delete from website_join_us_job_lang where job_title_id in
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,20 @@
+{
+  "name": "md-news-image-large",
+  "label": "Large Image",
+  "version": "0.0.80",
+  "description": "大图",
+  "main": "index.js",
+  "module": true,
+  "editable": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+  },
+  "keywords": [
+    "title"
+  ],
+  "poster": "",
+  "author": "Hipop",
+  "license": "ISC"
+}

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.material.mapper.MaterialLogMapper">
+    
+    <resultMap type="com.ruoyi.website.domain.vo.MaterialLogVO" id="MaterialLogResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="userName"    column="user_name"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="ip"    column="ip"    />
+        <result property="method"    column="method"    />
+        <result property="path"    column="path"    />
+        <result property="urlParameter"    column="url_parameter"    />
+        <result property="bodyParameter"    column="body_parameter"    />
+        <result property="responseData"    column="response_data"    />
+        <result property="exceptionResult"    column="exception_result"    />
+        <result property="time"    column="time"    />
+        <result property="type"     column="type" />
+        <result property="model"     column="model" />
+        <result property="downloadLink"     column="download_link" />
+
+    </resultMap>
+
+    <sql id="selectMaterialLogVo">
+        select id, user_id, create_time, ip, method, path, url_parameter, body_parameter, response_data, exception_result from material_log
+    </sql>
+
+    <select id="selectMaterialLogList" parameterType="MaterialLogVO" resultMap="MaterialLogResult">
+        select m.id, s.user_name, m.create_time as time, m.ip, m.method, m.path, m.url_parameter, m.body_parameter, m.response_data, m.exception_result, m.type, m.model, m.download_link,vcl.title
+        from material_log m
+        LEFT JOIN sys_user s on s.user_id = m.user_id
+        LEFT JOIN vehicle_class_lang vcl on vcl.vehicle_class_id = m.model and vcl.lang = 'en'
+        <where>
+            <if test="userId != null "> and m.user_id = #{userId}</if>
+            <if test="userName != null">AND s.user_name like concat('%', #{userName}, '%')</if>
+            <!--<if test="params.beginCreateTime != null and params.beginCreateTime != '' and params.endCreateTime != null and params.endCreateTime != ''"> and create_time between #{params.beginCreateTime} and #{params.endCreateTime}</if>-->
+            <if test="params.beginCreateTime != null and params.beginCreateTime != ''"><!-- 开始时间检索 -->
+                and date_format(m.create_time,'%y%m%d') &gt;= date_format(#{params.beginCreateTime},'%y%m%d')
+            </if>
+            <if test="params.endCreateTime != null and params.endCreateTime != ''"><!-- 结束时间检索 -->
+                and date_format(m.create_time,'%y%m%d') &lt;= date_format(#{params.endCreateTime},'%y%m%d')
+            </if>
+            <if test="ip != null  and ip != ''"> and m.ip = #{ip}</if>
+            <if test="method != null  and method != ''"> and m.method = #{method}</if>
+            <if test="path != null  and path != ''"> and m.path = #{path}</if>
+            <if test="urlParameter != null  and urlParameter != ''"> and m.url_parameter = #{urlParameter}</if>
+            <if test="bodyParameter != null  and bodyParameter != ''"> and m.body_parameter = #{bodyParameter}</if>
+            <if test="responseData != null  and responseData != ''"> and m.response_data = #{responseData}</if>
+            <if test="exceptionResult != null  and exceptionResult != ''"> and m.exception_result = #{exceptionResult}</if>
+            <if test="type != null  and type != ''"> and m.type = #{type}</if>
+            <if test="model != null  and model != ''"> and m.model = #{model}</if>
+            <if test="downloadLink != null  and downloadLink != ''"> and m.download_link like concat('%', #{downloadLink}, '%')</if>
+        </where>
+        order by m.create_time desc
+    </select>
+    
+    <select id="selectMaterialLogById" parameterType="Long" resultMap="MaterialLogResult">
+        select m.id, s.user_name, m.create_time, m.ip, m.method, m.path, m.url_parameter, m.body_parameter, m.response_data, m.exception_result, m.type, m.model, m.download_link
+        from material_log m
+        LEFT JOIN sys_user s on s.user_id = m.user_id
+        where id = #{id}
+    </select>
+        
+    <insert id="insertMaterialLog" parameterType="MaterialLog">
+        insert into material_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="ip != null">ip,</if>
+            <if test="method != null">method,</if>
+            <if test="path != null">path,</if>
+            <if test="urlParameter != null">url_parameter,</if>
+            <if test="bodyParameter != null">body_parameter,</if>
+            <if test="responseData != null">response_data,</if>
+            <if test="exceptionResult != null">exception_result,</if>
+            <if test="type != null">type,</if>
+            <if test="model != null">model,</if>
+            <if test="downloadLink != null">download_link,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="ip != null">#{ip},</if>
+            <if test="method != null">#{method},</if>
+            <if test="path != null">#{path},</if>
+            <if test="urlParameter != null">#{urlParameter},</if>
+            <if test="bodyParameter != null">#{bodyParameter},</if>
+            <if test="responseData != null">#{responseData},</if>
+            <if test="exceptionResult != null">#{exceptionResult},</if>
+            <if test="type != null">#{type},</if>
+            <if test="model != null">#{model},</if>
+            <if test="downloadLink != null">#{downloadLink},</if>
+         </trim>
+    </insert>
+
+    <update id="updateMaterialLog" parameterType="MaterialLog">
+        update material_log
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="ip != null">ip = #{ip},</if>
+            <if test="method != null">method = #{method},</if>
+            <if test="path != null">path = #{path},</if>
+            <if test="urlParameter != null">url_parameter = #{urlParameter},</if>
+            <if test="bodyParameter != null">body_parameter = #{bodyParameter},</if>
+            <if test="responseData != null">response_data = #{responseData},</if>
+            <if test="exceptionResult != null">exception_result = #{exceptionResult},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteMaterialLogById" parameterType="Long">
+        delete from material_log where id = #{id}
+    </delete>
+
+    <delete id="deleteMaterialLogByIds" parameterType="String">
+        delete from material_log where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

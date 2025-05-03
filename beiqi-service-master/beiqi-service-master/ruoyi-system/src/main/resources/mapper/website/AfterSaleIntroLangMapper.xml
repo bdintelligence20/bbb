@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.website.mapper.AfterSaleIntroLangMapper">
+    
+    <resultMap type="AfterSaleIntroLang" id="AfterSaleIntroLangResult">
+        <result property="id"    column="id"    />
+        <result property="saleIntroId"    column="sale_intro_id"    />
+        <result property="title"    column="title"    />
+        <result property="titleDescribe"    column="title_describe"    />
+        <result property="subTitle"    column="sub_title"    />
+        <result property="subTitleDescribe"    column="sub_title_describe"    />
+        <result property="imageUrl"    column="image_url"    />
+        <result property="language"    column="language"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateBy"    column="update_by"    />
+    </resultMap>
+
+    <sql id="selectAfterSaleIntroLangVo">
+        select id, sale_intro_id, title, title_describe, sub_title, sub_title_describe, image_url, language, create_time, update_time, create_by, update_by from website_after_sale_intro_lang
+    </sql>
+
+    <select id="selectAfterSaleIntroLangList" parameterType="AfterSaleIntroLang" resultMap="AfterSaleIntroLangResult">
+        <include refid="selectAfterSaleIntroLangVo"/>
+        <where>  
+            <if test="saleIntroId != null "> and sale_intro_id = #{saleIntroId}</if>
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="titleDescribe != null  and titleDescribe != ''"> and title_describe = #{titleDescribe}</if>
+            <if test="subTitle != null  and subTitle != ''"> and sub_title = #{subTitle}</if>
+            <if test="subTitleDescribe != null  and subTitleDescribe != ''"> and sub_title_describe = #{subTitleDescribe}</if>
+            <if test="imageUrl != null  and imageUrl != ''"> and image_url = #{imageUrl}</if>
+            <if test="language != null  and language != ''"> and language = #{language}</if>
+        </where>
+    </select>
+    
+    <select id="selectAfterSaleIntroLangById" parameterType="Long" resultMap="AfterSaleIntroLangResult">
+        <include refid="selectAfterSaleIntroLangVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertAfterSaleIntroLang" parameterType="AfterSaleIntroLang" useGeneratedKeys="true" keyProperty="id">
+        insert into website_after_sale_intro_lang
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="saleIntroId != null">sale_intro_id,</if>
+            <if test="title != null">title,</if>
+            <if test="titleDescribe != null">title_describe,</if>
+            <if test="subTitle != null">sub_title,</if>
+            <if test="subTitleDescribe != null">sub_title_describe,</if>
+            <if test="imageUrl != null">image_url,</if>
+            <if test="language != null">language,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateBy != null">update_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="saleIntroId != null">#{saleIntroId},</if>
+            <if test="title != null">#{title},</if>
+            <if test="titleDescribe != null">#{titleDescribe},</if>
+            <if test="subTitle != null">#{subTitle},</if>
+            <if test="subTitleDescribe != null">#{subTitleDescribe},</if>
+            <if test="imageUrl != null">#{imageUrl},</if>
+            <if test="language != null">#{language},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+         </trim>
+    </insert>
+
+    <update id="updateAfterSaleIntroLang" parameterType="AfterSaleIntroLang">
+        update website_after_sale_intro_lang
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="saleIntroId != null">sale_intro_id = #{saleIntroId},</if>
+            <if test="title != null">title = #{title},</if>
+            <if test="titleDescribe != null">title_describe = #{titleDescribe},</if>
+            <if test="subTitle != null">sub_title = #{subTitle},</if>
+            <if test="subTitleDescribe != null">sub_title_describe = #{subTitleDescribe},</if>
+            <if test="imageUrl != null">image_url = #{imageUrl},</if>
+            <if test="language != null">language = #{language},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteAfterSaleIntroLangById" parameterType="Long">
+        delete from website_after_sale_intro_lang where id = #{id}
+    </delete>
+
+    <delete id="deleteAfterSaleIntroLangByIds" parameterType="String">
+        delete from website_after_sale_intro_lang where id in 
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <insert id="batchInsert">
+        insert into website_after_sale_intro_lang
+        (sale_intro_id, title, title_describe, sub_title, sub_title_describe, image_url, `language`,
+        create_time, update_time, create_by, update_by)
+        values
+        <foreach collection ="list" item="item" index="index" separator =",">
+            (#{item.saleIntroId},
+            #{item.title},
+            #{item.titleDescribe},
+            #{item.subTitle},
+            #{item.subTitleDescribe},
+            #{item.imageUrl},
+            #{item.language},
+            #{item.createTime},
+            #{item.updateTime},
+            #{item.createBy},
+            #{item.updateBy})
+        </foreach >
+    </insert>
+
+    <delete id="deleteByIntroIds">
+        delete from website_after_sale_intro_lang where sale_intro_id in
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

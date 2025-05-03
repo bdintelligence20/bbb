@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>BAIC国际官网媒体联系信息</title>
+</head>
+<body>
+亲爱的同事：
+<p style="text-indent:2em;margin:0">BAIC国际官网收到一封媒体联系信息，详细信息见下文，也请及时跟进。</p>
+<br/>
+<table border="1" style="border-collapse:collapse">
+    <tbody>
+    <tr>
+        <th>Gender</th>
+        <td><span th:text="${gender}"></span></td>
+    </tr>
+    <tr>
+        <th>First Name</th>
+        <td><span th:text="${firstName}"></span></td>
+    </tr>
+    <tr>
+        <th>Last Name</th>
+        <td><span th:text="${lastName}"></span></td>
+    </tr>
+    <tr>
+        <th>Media Name</th>
+        <td><span th:text="${mediaName}"></span></td>
+    </tr>
+    <tr>
+        <th>E-mail</th>
+        <td><span th:text="${email}"></span></td>
+    </tr>
+    <tr>
+        <th>Message</th>
+        <td><span th:text="${msg}"></span></td>
+    </tr>
+    </tbody>
+</table>
+<th:block th:include="mail/common :: footer"/>
+</body>
+</html>

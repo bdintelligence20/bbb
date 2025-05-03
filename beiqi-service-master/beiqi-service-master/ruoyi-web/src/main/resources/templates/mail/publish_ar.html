@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>تحديث أخبار موقع بايك المشترك الخاص بك!</title>
+</head>
+<body>
+<div dir="rtl">
+    عزيزي:
+    <br/>
+    <p style="text-indent:2em;margin:0">تحديث أخبار الموقع الرسمي بايك إنترناشونال! ، وصفها بإيجاز على النحو التالي:</p>
+    [[${newsTitle}]]
+    <br/>
+    [[${#dates.format(newsPublishTime,'yyyy-MM-dd')}]]
+    <br/>
+    [[${newsSummarize}]]
+    <br/>
+    يمكنك أيضًا الانتقال سريعًا إلى
+    <a th:href="@{https://www.baicglobal.com/ar/news/newsRelease/detail/{id}(id=${newsId})}"><span>[[${newsTitle}]]</span></a>
+</div>
+<th:block th:include="mail/common :: footer"/>
+</body>
+</html>

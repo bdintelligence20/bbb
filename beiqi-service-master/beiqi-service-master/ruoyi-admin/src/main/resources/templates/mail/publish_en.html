@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Your subscribed BAIC website news update! </title>
+</head>
+<body>
+<div>
+    Dear:
+    <p style="text-indent:2em;margin:0">BAIC International official website news update, briefly described as
+        follows:</p>
+    [[${newsTitle}]]
+    <br/>
+    [[${#dates.format(newsPublishTime,'yyyy-MM-dd')}]]
+    <br/>
+    [[${newsSummarize}]]
+    <br/>
+    You can also quickly go to and check it out at <a
+        th:href="@{https://www.baicglobal.com/news/newsRelease/detail/{id}(id=${newsId})}"><span>[[${newsTitle}]]</span></a>.
+</div>
+<th:block th:include="mail/common :: footer"/>
+</body>
+</html>

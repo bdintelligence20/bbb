@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.website.mapper.WebsiteBannerMapper">
+    
+    <resultMap type="WebsiteBanner" id="WebsiteBannerResult">
+        <result property="bannerId"    column="banner_id"    />
+        <result property="title"    column="title"    />
+        <result property="imageUrl"    column="image_url"    />
+        <result property="videoUrl"    column="video_url"    />
+        <result property="linkUrl"    column="link_url"    />
+        <result property="sort"    column="sort"    />
+        <result property="type"    column="type"    />
+        <result property="describe"    column="describe"    />
+        <result property="aspectRatio"    column="aspect_ratio"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="remark"    column="remark"    />
+        <result property="enable"   column="enable"     />
+    </resultMap>
+
+    <sql id="selectWebsiteBannerVo">
+        select banner_id, title, image_url, video_url, link_url, sort, `type`, `describe`, aspect_ratio, del_flag, create_time, update_time, create_by, update_by, remark, enable from website_banner
+    </sql>
+
+    <select id="selectWebsiteBannerList" parameterType="WebsiteBanner" resultMap="WebsiteBannerResult">
+        <include refid="selectWebsiteBannerVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="type != null"> and `type` = #{type}</if>
+            <if test="imageUrl != null  and imageUrl != ''"> and image_url = #{imageUrl}</if>
+            <if test="videoUrl != null  and videoUrl != ''"> and video_url = #{videoUrl}</if>
+            <if test="linkUrl != null  and linkUrl != ''"> and link_url = #{linkUrl}</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="aspectRatio != null  and aspectRatio != ''"> and aspect_ratio = #{aspectRatio}</if>
+            <if test="enable != null  and enable != ''"> and enable = #{enable}</if>
+        </where>
+        order by sort
+    </select>
+    
+    <select id="selectWebsiteBannerById" parameterType="Long" resultMap="WebsiteBannerResult">
+        <include refid="selectWebsiteBannerVo"/>
+        where banner_id = #{bannerId}
+    </select>
+        
+    <insert id="insertWebsiteBanner" parameterType="WebsiteBanner" useGeneratedKeys="true" keyProperty="bannerId">
+        insert into website_banner
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null">title,</if>
+            <if test="imageUrl != null">image_url,</if>
+            <if test="videoUrl != null">video_url,</if>
+            <if test="linkUrl != null">link_url,</if>
+            <if test="sort != null">sort,</if>
+            <if test="type != null"> `type`,</if>
+            <if test="describe != null">`describe`,</if>
+            <if test="aspectRatio != null">aspect_ratio,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="remark != null">remark,</if>
+            <if test="enable != null">enable,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null">#{title},</if>
+            <if test="imageUrl != null">#{imageUrl},</if>
+            <if test="videoUrl != null">#{videoUrl},</if>
+            <if test="linkUrl != null">#{linkUrl},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="type != null">#{type},</if>
+            <if test="describe != null">#{describe},</if>
+            <if test="aspectRatio != null">#{aspectRatio},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="enable != null">#{enable},</if>
+         </trim>
+    </insert>
+
+    <update id="updateWebsiteBanner" parameterType="WebsiteBanner">
+        update website_banner
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null">title = #{title},</if>
+            <if test="imageUrl != null">image_url = #{imageUrl},</if>
+            <if test="videoUrl != null">video_url = #{videoUrl},</if>
+            <if test="linkUrl != null">link_url = #{linkUrl},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="type != null">`type` = #{type},</if>
+            <if test="describe != null">`describe` = #{describe},</if>
+            <if test="aspectRatio != null">aspect_ratio = #{aspectRatio},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="enable != null">enable = #{enable},</if>
+        </trim>
+        where banner_id = #{bannerId}
+    </update>
+
+    <delete id="deleteWebsiteBannerById" parameterType="Long">
+        delete from website_banner where banner_id = #{bannerId}
+    </delete>
+
+    <delete id="deleteWebsiteBannerByIds" parameterType="String">
+        delete from website_banner where banner_id in 
+        <foreach item="bannerId" collection="list" open="(" separator="," close=")">
+            #{bannerId}
+        </foreach>
+    </delete>
+</mapper>

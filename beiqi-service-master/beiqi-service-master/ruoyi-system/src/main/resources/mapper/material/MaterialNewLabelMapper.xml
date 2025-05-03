@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.material.mapper.MaterialNewLabelMapper">
+
+    <resultMap type="com.ruoyi.website.domain.vo.MaterialNewLabelVO" id="MaterialnNewLabelTypeResult">
+        <result property="userId"    column="user_id"    />
+        <result property="materialId"    column="material_id"    />
+        <result property="newLabelFlag"    column="new_label_flag"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="type" column="type" />
+    </resultMap>
+
+
+    <select id="selectNewLabel" parameterType="MaterialNewLabelVO" resultMap="MaterialnNewLabelTypeResult">
+        select user_id,material_id,new_label_flag from material_new_label
+        where user_id = #{userId}
+    </select>
+
+    <insert id="insertNewLabelVO">
+        insert into material_new_label (user_id,material_id,create_time) values (#{userId}, #{materialId},sysdate())
+    </insert>
+
+    <select id="selectTypeNewLabel" parameterType="MaterialNewLabelVO" resultMap="MaterialnNewLabelTypeResult">
+        SELECT mnl.new_label_flag,m.type from material_new_label mnl
+        RIGHT join material m on m.material_id = mnl.material_id
+        where mnl.user_id = #{userId}
+        GROUP BY m.type
+    </select>
+
+    <select id="selectMaterialNewLabel" parameterType="MaterialNewLabelVO" resultMap="MaterialnNewLabelTypeResult">
+        SELECT
+            m.type,
+            m.model,
+            mn.new_label_flag
+        FROM
+            material m
+                LEFT JOIN ( SELECT new_label_flag,type,model FROM material_type_new_label WHERE user_id = #{userId} ) mn ON m.type = mn.type
+                AND m.model = mn.model
+        WHERE m.status = 0 OR m.material_id IN (SELECT material_id FROM sys_user_material WHERE user_id = #{userId})
+        GROUP BY
+            m.type,
+            m.model
+    </select>
+</mapper>

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.website.mapper.NewsMapper">
+    
+    <resultMap type="News" id="NewsResult">
+        <result property="id"    column="id"    />
+        <result property="categoryId"    column="category_id"    />
+        <result property="title"    column="title"    />
+        <result property="summarize"    column="summarize"    />
+        <result property="imageUrl"    column="image_url"    />
+        <result property="sort"    column="sort"    />
+        <result property="status"    column="status"    />
+        <result property="pageType"    column="page_type"    />
+        <result property="recommend"    column="recommend"    />
+        <result property="publishTime"    column="publish_time"    />
+        <result property="enable"    column="enable"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectNewsVo">
+        select id, category_id, title, summarize, image_url, sort, status, page_type, recommend, publish_time,
+        enable, create_by, create_time, update_by, update_time, del_flag, remark from website_news
+    </sql>
+
+    <select id="selectNewsList" parameterType="News" resultMap="NewsResult">
+        <include refid="selectNewsVo"/>
+        <where>
+            <if test="pageType != null"> and page_type = #{pageType}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="categoryId != null "> and category_id = #{categoryId}</if>
+            <if test="title != null  and title != ''"> and title like concat('%', #{title}, '%')</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="enable != null "> and enable = #{enable}</if>
+            <if test="recommend != null "> and recommend = #{recommend}</if>
+        </where>
+            order by create_time desc
+    </select>
+
+    <select id="selectByPageType" resultType="java.lang.Long">
+        select id
+        from website_news
+        where status = 1
+        <if test="pageType != null">
+            and page_type = #{pageType}
+        </if>
+    </select>
+    
+    <select id="selectNewsById" parameterType="Long" resultMap="NewsResult">
+        <include refid="selectNewsVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertNews" parameterType="News" useGeneratedKeys="true" keyProperty="id">
+        insert into website_news
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="categoryId != null">category_id,</if>
+            <if test="title != null and title != ''">title,</if>
+            <if test="summarize != null and summarize != ''">summarize,</if>
+            <if test="imageUrl != null and imageUrl != ''">image_url,</if>
+            <if test="sort != null">sort,</if>
+            <if test="status != null">status,</if>
+            <if test="pageType != null">page_type,</if>
+            <if test="recommend != null">recommend,</if>
+            <if test="publishTime != null">publish_time,</if>
+            <if test="enable != null">enable,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="categoryId != null">#{categoryId},</if>
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="summarize != null and summarize != ''">#{summarize},</if>
+            <if test="imageUrl != null and imageUrl != ''">#{imageUrl},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="status != null">#{status},</if>
+            <if test="pageType != null">#{pageType},</if>
+            <if test="recommend != null">#{recommend},</if>
+            <if test="publishTime != null">#{publishTime},</if>
+            <if test="enable != null">#{enable},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateNews" parameterType="News">
+        update website_news
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="categoryId != null">category_id = #{categoryId},</if>
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="summarize != null and summarize != ''">summarize = #{summarize},</if>
+            <if test="imageUrl != null and imageUrl != ''">image_url = #{imageUrl},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="pageType != null">page_type = #{pageType},</if>
+            <if test="recommend != null">recommend = #{recommend},</if>
+            <if test="publishTime != null">publish_time = #{publishTime},</if>
+            <if test="enable != null">enable = #{enable},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteNewsById" parameterType="Long">
+        delete from website_news where id = #{id}
+    </delete>
+
+    <delete id="deleteNewsByIds">
+        delete from website_news where id in 
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="searchNewsList" resultType="com.ruoyi.website.domain.vo.NewsSearchResultVO">
+        select
+        w.title, w.summarize, w.image_url as imageUrl, w.id, w.publish_time as publishTime,
+        w.create_time as createTime, w.category_id as categoryId
+        from website_news as w
+        left join website_news_content as wc on w.id = wc.news_id
+        <where>
+            and w.status = 1 and w.enable = 1
+            <if test="keyword != null  and keyword != ''">
+                and
+                (w.title like concat('%', #{keyword}, '%')
+                or w.summarize like concat('%', #{keyword}, '%')
+                or wc.content like concat('%', #{keyword}, '%'))
+            </if>
+            <if test="categoryId != null">
+                and w.category_id = #{categoryId}
+            </if>
+            <if test="recommend != null">
+                and w.recommend = #{recommend}
+            </if>
+            <if test="recommend != null and recommend == 0">
+                order by w.publish_time desc
+            </if>
+            <if test="recommend != null and recommend == 1">
+                order by w.sort
+            </if>
+        </where>
+    </select>
+
+    <select id="selectNewsDetail" resultType="com.ruoyi.website.domain.vo.NewsSearchResultVO">
+        select
+        w.title, w.summarize, w.image_url as imageUrl, w.id, w.publish_time as publishTime,
+        w.create_time as createTime, wc.content
+        from website_news as w
+        left join website_news_content as wc on w.id = wc.news_id
+        where w.id = #{id} and w.enable = 1
+    </select>
+
+    <select id="selectNewsDetailByCategoryId" resultType="com.ruoyi.website.domain.vo.NewsSearchResultVO">
+        select
+        w.title, w.summarize, w.image_url as imageUrl, w.id, w.publish_time as publishTime,
+        w.create_time as createTime, wc.content
+        from website_news as w
+        left join website_news_content as wc on w.id = wc.news_id
+        where w.category_id = #{categoryId} and w.status = 1 limit 1
+    </select>
+
+    <select id="selectRecommend" resultType="java.lang.Integer">
+        select count(1)
+        from website_news
+        where recommend = 1
+        and category_id =  #{categoryId}
+    </select>
+</mapper>

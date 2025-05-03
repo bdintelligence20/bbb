@@ -1,0 +1,65 @@
+{
+  "formItems": [
+    {
+      "type": "editor-form-style-text-input",
+      "elFormItemProps": {
+        "prop": "text1",
+        "label": "Text content 1"
+      },
+      "elFormItemChildProps": {
+        "placeholder": "Please enter the Text content",
+        "defaultValue": "xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx "
+      }
+    },
+    {
+      "type": "editor-form-style-text-input",
+      "elFormItemProps": {
+        "prop": "text2",
+        "label": "Text content 2"
+      },
+      "elFormItemChildProps": {
+        "placeholder": "Please enter the Text content",
+        "defaultValue": "xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx xxxx "
+      }
+    },
+    {
+      "type": "switch",
+      "elFormItemProps": {
+        "prop": "reverse",
+        "label": "Content reverse"
+      },
+      "elFormItemChildProps": {
+        "active-text": "Z-sharp",
+        "inactive-text": "Reverse Z-sharp"
+      }
+    },
+    {
+      "type": "el-switch",
+      "elFormItemProps": {
+        "prop": "darkTheme",
+        "label": "Theme"
+      },
+      "elFormItemChildProps": {
+        "active-text": "Dark theme",
+        "inactive-text": "Bright color theme",
+        "@change": "handleSubmit"
+      }
+    }
+  ],
+  "i18n": {
+    "en": {
+      "Text content 1": "Text content 1",
+      "Text content 2": "Text content 2",
+      "Text content": "Text content",
+      "Content reverse": "Content reverse",
+      "Theme": "Theme"
+    },
+    "zh": {
+      "Text content 1": "文本内容1",
+      "Text content 2": "文本内容2",
+      "Text content": "文本内容",
+      "Content reverse": "左右反转",
+      "Theme": "主题"
+    }
+  }
+}

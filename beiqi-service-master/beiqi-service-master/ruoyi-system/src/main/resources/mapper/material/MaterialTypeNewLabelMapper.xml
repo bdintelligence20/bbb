@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.material.mapper.MaterialTypeNewLabelMapper">
+
+    <resultMap type="com.ruoyi.website.domain.vo.MaterialNewLabelVO" id="MaterialnNewLabelTypeResult">
+        <result property="userId"    column="user_id"    />
+        <result property="newLabelFlag"    column="new_label_flag"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="type" column="type" />
+        <result property="model" column="model" />
+    </resultMap>
+
+    <insert id="insertPyteNewLabelVO">
+        insert into material_type_new_label
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="model != null">model,</if>
+            type,
+            user_id,
+            create_time
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="model != null">#{model},</if>
+            #{type},
+            #{userId},
+            sysdate()
+        </trim>
+    </insert>
+
+    <select id="selectTypeNewLabel" parameterType="MaterialNewLabelVO" resultMap="MaterialnNewLabelTypeResult">
+        select user_id,new_label_flag,type,model from material_type_new_label
+        where user_id = #{userId}
+    </select>
+
+    <delete id="delectTypeNewLabel" parameterType="String">
+        delete from material_type_new_label
+        where type = #{type}
+        <if test="model != null and model != ''">
+            and model = #{model}
+        </if>
+    </delete>
+
+    <delete id="delectTypeNewLabels">
+        delete from material_type_new_label
+        where type = #{type}
+        <if test="model != null and model != ''">
+            and model = #{model}
+        </if>
+        <if test="userId != null and userId != ''">
+            and user_id = #{userId}
+        </if>
+    </delete>
+    <!--<delete id="delectTypeNewLabels">
+        delete from material_type_new_label where type in
+        <foreach item="item" collection="list" open="(" separator="," close=")">
+            #{item.type}
+        </foreach>
+        and user_id in
+        <foreach item="item" collection="list" open="(" separator="," close=")">
+            #{item.userId}
+        </foreach>
+        and model in
+        <foreach item="item" collection="list" open="(" separator="," close=")">
+            <if test="item.model != null and item.model != ''">
+                #{item.model}
+            </if>
+        </foreach>
+    </delete>-->
+
+</mapper>

@@ -1,0 +1,124 @@
+{
+  "defaultValue": {
+    "textPicSpace": 1
+  },
+  "formItems": [
+    {
+      "type": "img-uploader",
+      "elFormItemProps": {
+        "prop": "image1",
+        "label": "Image 1"
+      },
+      "elFormItemChildProps": {
+        "placeholder": "place input the img src"
+      }
+    },
+    {
+      "type": "editor-form-style-text-input",
+      "elFormItemProps": {
+        "prop": "text1",
+        "label": "Text 1 content"
+      },
+      "elFormItemChildProps": {
+        "placeholder": "Please enter the Text content",
+        "defaultValue": "Please enter the Text content"
+      }
+    },
+
+
+    {
+      "type": "img-uploader",
+      "elFormItemProps": {
+        "prop": "image2",
+        "label": "Image 2"
+      },
+      "elFormItemChildProps": {
+        "placeholder": "place input the img src"
+      }
+    },
+    {
+      "type": "editor-form-style-text-input",
+      "elFormItemProps": {
+        "prop": "text2",
+        "label": "Text 2 content"
+      },
+      "elFormItemChildProps": {
+        "placeholder": "Please enter the Text content",
+        "defaultValue": "Please enter the Text content"
+      }
+    },
+
+
+    {
+      "type": "img-uploader",
+      "elFormItemProps": {
+        "prop": "image3",
+        "label": "Image 3"
+      },
+      "elFormItemChildProps": {
+        "placeholder": "place input the img src"
+      }
+    },
+    {
+      "type": "editor-form-style-text-input",
+      "elFormItemProps": {
+        "prop": "text3",
+        "label": "Text 3 content"
+      },
+      "elFormItemChildProps": {
+        "placeholder": "Please enter the Text content",
+        "defaultValue": "Please enter the Text content"
+      }
+    },
+    {
+      "type": "el-slider",
+      "elFormItemProps": {
+        "prop": "textPicSpace",
+        "label": "Spacing between content and images",
+        "Content reverse": "Content reverse"
+      },
+      "elFormItemChildProps": {
+        "placeholder": "place input the spacing",
+        ":step": "0.1",
+        ":min": 0,
+        ":max": 10,
+        "style":"margin: 0 1em;",
+        "@input": "handleSubmit"
+      }
+    },
+    {
+      "type": "el-switch",
+      "elFormItemProps": {
+        "prop": "darkTheme",
+        "label": "Theme"
+      },
+      "elFormItemChildProps": {
+        "active-text": "Dark theme",
+        "inactive-text": "Bright color theme",
+        "@change": "handleSubmit"
+      }
+    }
+  ],
+  "i18n": {
+    "en": {
+      "Image 1": "Image 1",
+      "Text 1 content": "Text content",
+      "Image 2": "Image 2",
+      "Text 2 content": "Text content",
+      "Image 3": "Image 3",
+      "Text 3 content": "Text content",
+      "Spacing between content and images": "Spacing between content and images",
+      "Theme": "Theme"
+    },
+    "zh": {
+      "Image 1": "图片1",
+      "Text 1 content": "文本内容1",
+      "Image 2": "图片2",
+      "Text 2 content": "文本内容2",
+      "Image 3": "图片3",
+      "Text 3 content": "文本内容3",
+      "Spacing between content and images": "内容和图片的间距",
+      "Theme": "主题"
+    }
+  }
+}

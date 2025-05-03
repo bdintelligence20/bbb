@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.website.mapper.IndexShowLocationLangMapper">
+    
+    <resultMap type="IndexShowLocationLang" id="IndexShowLocationLangResult">
+        <result property="id"    column="id"    />
+        <result property="indexId"    column="index_id"    />
+        <result property="title"    column="title"    />
+        <result property="describe"    column="describe"    />
+        <result property="imageUrl"    column="image_url"    />
+        <result property="videoUrl"    column="video_url"    />
+        <result property="linkUrl"    column="link_url"    />
+        <result property="type"    column="type"    />
+        <result property="language"    column="language"    />
+        <result property="aspectRatio"    column="aspect_ratio"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectIndexShowLocationLangVo">
+        select id, index_id, title, `describe`, image_url, video_url,link_url, `type`, `language`, aspect_ratio, create_time, update_time, create_by, update_by, remark from website_index_show_location_lang
+    </sql>
+
+    <select id="selectIndexShowLocationLangList" parameterType="IndexShowLocationLang" resultMap="IndexShowLocationLangResult">
+        <include refid="selectIndexShowLocationLangVo"/>
+        <where>  
+            <if test="indexId != null "> and index_id = #{indexId}</if>
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="describe != null  and describe != ''"> and `describe` = #{describe}</if>
+            <if test="imageUrl != null  and imageUrl != ''"> and image_url = #{imageUrl}</if>
+            <if test="linkUrl != null  and linkUrl != ''"> and link_url = #{linkUrl}</if>
+            <if test="type != null "> and `type` = #{type}</if>
+            <if test="language != null  and language != ''"> and `language` = #{language}</if>
+            <if test="aspectRatio != null  and aspectRatio != ''"> and aspect_ratio = #{aspectRatio}</if>
+        </where>
+    </select>
+    
+    <select id="selectIndexShowLocationLangById" parameterType="Long" resultMap="IndexShowLocationLangResult">
+        <include refid="selectIndexShowLocationLangVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertIndexShowLocationLang" parameterType="IndexShowLocationLang" useGeneratedKeys="true" keyProperty="id">
+        insert into website_index_show_location_lang
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="indexId != null">index_id,</if>
+            <if test="title != null">title,</if>
+            <if test="describe != null">`describe`,</if>
+            <if test="imageUrl != null">image_url,</if>
+            <if test="videoUrl != null">video_url,</if>
+            <if test="linkUrl != null">link_url,</if>
+            <if test="type != null">`type`,</if>
+            <if test="language != null">`language`,</if>
+            <if test="aspectRatio != null">aspect_ratio,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="indexId != null">#{indexId},</if>
+            <if test="title != null">#{title},</if>
+            <if test="describe != null">#{describe},</if>
+            <if test="imageUrl != null">#{imageUrl},</if>
+            <if test="videoUrl != null">#{videoUrl},</if>
+            <if test="linkUrl != null">#{linkUrl},</if>
+            <if test="type != null">#{type},</if>
+            <if test="language != null">#{language},</if>
+            <if test="aspectRatio != null">#{aspectRatio},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateIndexShowLocationLang" parameterType="IndexShowLocationLang">
+        update website_index_show_location_lang
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="indexId != null">index_id = #{indexId},</if>
+            <if test="title != null">title = #{title},</if>
+            <if test="describe != null">`describe` = #{describe},</if>
+            <if test="imageUrl != null">image_url = #{imageUrl},</if>
+            <if test="videoUrl != null">video_url = #{videoUrl},</if>
+            <if test="linkUrl != null">link_url = #{linkUrl},</if>
+            <if test="type != null">`type` = #{type},</if>
+            <if test="language != null">`language` = #{language},</if>
+            <if test="aspectRatio != null">aspect_ratio = #{aspectRatio},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteIndexShowLocationLangById" parameterType="Long">
+        delete from website_index_show_location_lang where id = #{id}
+    </delete>
+
+    <delete id="deleteIndexShowLocationLangByIds">
+        delete from website_index_show_location_lang where id in 
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <insert id="batchInsert">
+        insert into website_index_show_location_lang
+        (index_id, title, `describe`, image_url, video_url, link_url, `type`, `language`, aspect_ratio,
+        create_time, update_time, create_by, update_by)
+        values
+        <foreach collection ="list" item="item" index="index" separator =",">
+            (#{item.indexId},
+            #{item.title},
+            #{item.describe},
+            #{item.imageUrl},
+            #{item.videoUrl},
+            #{item.linkUrl},
+            #{item.type},
+            #{item.language},
+            #{item.aspectRatio},
+            #{item.createTime},
+            #{item.updateTime},
+            #{item.createBy},
+            #{item.updateBy})
+        </foreach >
+    </insert>
+</mapper>

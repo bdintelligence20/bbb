@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.website.mapper.AfterSaleIntroMapper">
+    
+    <resultMap type="AfterSaleIntro" id="AfterSaleIntroResult">
+        <result property="id"    column="id"    />
+        <result property="sort"    column="sort"    />
+        <result property="status"    column="status"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="updateBy"    column="update_by"    />
+    </resultMap>
+
+    <sql id="selectAfterSaleIntroVo">
+        select id, sort, status, create_time, update_time, create_by, update_by from website_after_sale_intro
+    </sql>
+
+    <select id="selectAfterSaleIntroList"  resultType="com.ruoyi.website.domain.vo.AfterSaleIntroVO">
+        select
+        si.id, si.sort, si.status, si.create_time as createTime, il.sale_intro_id as saleIntroLangId, il.title,
+        il.title_describe as titleDescribe,
+        il.sub_title as subTitle,il.sub_title_describe as subTitleDescribe, il.image_url as imageUrl, il.language
+        from website_after_sale_intro as si
+        left join website_after_sale_intro_lang as il on si.id = il.sale_intro_id
+        <where>
+            <if test="lang != null and lang != ''">
+                il.language = #{lang}
+            </if>
+            <if test="status != null">
+                and si.status = #{status}
+            </if>
+            order by si.sort
+        </where>
+    </select>
+    
+    <select id="selectAfterSaleIntroById" parameterType="Long" resultMap="AfterSaleIntroResult">
+        <include refid="selectAfterSaleIntroVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertAfterSaleIntro" parameterType="AfterSaleIntro" useGeneratedKeys="true" keyProperty="id">
+        insert into website_after_sale_intro
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sort != null">sort,</if>
+            <if test="status != null">status,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateBy != null">update_by,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sort != null">#{sort},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+         </trim>
+    </insert>
+
+    <update id="updateAfterSaleIntro" parameterType="AfterSaleIntro">
+        update website_after_sale_intro
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteAfterSaleIntroById" parameterType="Long">
+        delete from website_after_sale_intro where id = #{id}
+    </delete>
+
+    <delete id="deleteAfterSaleIntroByIds" parameterType="String">
+        delete from website_after_sale_intro where id in 
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="selectAfterSaleIntroDetailById" resultType="com.ruoyi.website.domain.vo.AfterSaleIntroVO">
+        select
+        si.id, si.sort, si.status, si.create_time as createTime, il.id as saleIntroLangId, il.title,
+        il.title_describe as titleDescribe,
+        il.sub_title as subTitle,il.sub_title_describe as subTitleDescribe, il.image_url as imageUrl, il.language
+        from website_after_sale_intro as si
+        left join website_after_sale_intro_lang as il on si.id = il.sale_intro_id
+        where si.id = #{id}
+    </select>
+</mapper>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.website.mapper.NewsContentLangMapper">
+    
+    <resultMap type="NewsContentLang" id="NewsContentLangResult">
+        <result property="id"    column="id"    />
+        <result property="newsContentId"    column="news_content_id"    />
+        <result property="content"    column="content"    />
+        <result property="language"    column="language"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectNewsContentLangVo">
+        select id, news_content_id, content, `language`, create_by, create_time, update_by, update_time, del_flag, remark from website_news_content_lang
+    </sql>
+
+    <select id="selectNewsContentLangList" parameterType="NewsContentLang" resultMap="NewsContentLangResult">
+        <include refid="selectNewsContentLangVo"/>
+        <where>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="language != null  and language != ''"> and `language` = #{language}</if>
+        </where>
+    </select>
+    
+    <select id="selectNewsContentLangById" parameterType="Long" resultMap="NewsContentLangResult">
+        <include refid="selectNewsContentLangVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertNewsContentLang" parameterType="NewsContentLang" useGeneratedKeys="true" keyProperty="id">
+        insert into website_news_content_lang
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="newsContentId != null">news_content_id,</if>
+            <if test="content != null">content,</if>
+            <if test="language != null">`language`,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="newsContentId != null">#{newsContentId},</if>
+            <if test="content != null">#{content},</if>
+            <if test="language != null">#{language},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateNewsContentLang" parameterType="NewsContentLang">
+        update website_news_content_lang
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="newsContentId != null">news_content_id = #{newsContentId},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="language != null">`language` = #{language},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteNewsContentLangById" parameterType="Long">
+        delete from website_news_content_lang where id = #{id}
+    </delete>
+
+    <delete id="deleteNewsContentLangByIds" parameterType="String">
+        delete from website_news_content_lang where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <insert id="batchInsert">
+        insert into website_news_content_lang
+        (news_content_id, content, `language`, create_by, create_time)
+        values
+        <foreach collection ="list" item="item" index="index" separator =",">
+            (#{item.newsContentId},
+            #{item.content},
+            #{item.language},
+            #{item.createBy},
+            #{item.createTime})
+        </foreach >
+    </insert>
+
+    <select id="selectByContentId" resultMap="NewsContentLangResult">
+        select content,`language`
+        from website_news_content_lang
+        where news_content_id = #{newsContentId}
+    </select>
+
+    <update id="batchUpdate">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update website_news_content_lang
+            <set>
+                <if test="item.content != null and item.content != ''">
+                    content = #{item.content},
+                </if>
+                <if test="item.updateBy != null and item.updateBy != ''">
+                    update_by = #{item.updateBy},
+                </if>
+                <if test="item.updateTime != null">
+                    update_time = #{item.updateTime},
+                </if>
+            </set>
+            where news_content_id = #{item.newsContentId} and `language` = #{item.language}
+        </foreach>
+    </update>
+
+    <delete id="deleteByNewsContentIds">
+        delete from website_news_content_lang where news_content_id in
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <update id="updateByNewsContentId">
+        update website_news_content_lang
+        <set>
+            <if test="createBy != null">
+                create_by = #{createBy},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="content != null and content != ''">
+                content = #{content},
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                update_by = #{updateBy},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </set>
+        where news_content_id = #{newsContentId} and `language` = #{language}
+    </update>
+</mapper>

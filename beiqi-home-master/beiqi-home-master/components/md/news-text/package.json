@@ -1,0 +1,20 @@
+{
+  "name": "md-news-text",
+  "label": "Text Content",
+  "version": "0.0.80",
+  "description": "文本内容",
+  "main": "index.js",
+  "module": true,
+  "editable": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+  },
+  "keywords": [
+    "title"
+  ],
+  "poster": "",
+  "author": "Hipop",
+  "license": "ISC"
+}
