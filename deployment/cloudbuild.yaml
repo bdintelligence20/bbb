@@ -4,23 +4,23 @@ options:
 steps:
   # Build Website Service (Nuxt.js)
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/${PROJECT_ID}/beiqi-website:${SHORT_SHA}', '-f', './services/website/Dockerfile', '.']
+    args: ['build', '-t', 'gcr.io/${PROJECT_ID}/beiqi-website:${SHORT_SHA}', '-f', 'deployment/services/website/Dockerfile', '.']
 
   # Build Management Panel (Vue.js)
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/${PROJECT_ID}/beiqi-management:${SHORT_SHA}', '-f', './services/management-panel/Dockerfile', '.']
+    args: ['build', '-t', 'gcr.io/${PROJECT_ID}/beiqi-management:${SHORT_SHA}', '-f', 'deployment/services/management-panel/Dockerfile', '.']
 
   # Build Admin API Service (Java Spring Boot)
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/${PROJECT_ID}/beiqi-admin-api:${SHORT_SHA}', '-f', './services/admin-api/Dockerfile', '.']
+    args: ['build', '-t', 'gcr.io/${PROJECT_ID}/beiqi-admin-api:${SHORT_SHA}', '-f', 'deployment/services/admin-api/Dockerfile', '.']
 
   # Build Web API Service (Java Spring Boot)
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/${PROJECT_ID}/beiqi-web-api:${SHORT_SHA}', '-f', './services/web-api/Dockerfile', '.']
+    args: ['build', '-t', 'gcr.io/${PROJECT_ID}/beiqi-web-api:${SHORT_SHA}', '-f', 'deployment/services/web-api/Dockerfile', '.']
 
   # Build GeoIP Service (Node.js Express)
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/${PROJECT_ID}/beiqi-geoip:${SHORT_SHA}', '-f', './services/geoip/Dockerfile', '.']
+    args: ['build', '-t', 'gcr.io/${PROJECT_ID}/beiqi-geoip:${SHORT_SHA}', '-f', 'deployment/services/geoip/Dockerfile', '.']
 
   # Push all images to Container Registry
   - name: 'gcr.io/cloud-builders/docker'
@@ -64,16 +64,16 @@ steps:
     args:
       - '-c'
       - |
-        sed -i "s|build:|image: gcr.io/${PROJECT_ID}/beiqi-website:latest|g" docker-compose.yml
-        sed -i "s|context: ./services/website||g" docker-compose.yml
-        sed -i "s|build:|image: gcr.io/${PROJECT_ID}/beiqi-management:latest|g" docker-compose.yml
-        sed -i "s|context: ./services/management-panel||g" docker-compose.yml
-        sed -i "s|build:|image: gcr.io/${PROJECT_ID}/beiqi-admin-api:latest|g" docker-compose.yml
-        sed -i "s|context: ./services/admin-api||g" docker-compose.yml
-        sed -i "s|build:|image: gcr.io/${PROJECT_ID}/beiqi-web-api:latest|g" docker-compose.yml
-        sed -i "s|context: ./services/web-api||g" docker-compose.yml
-        sed -i "s|build:|image: gcr.io/${PROJECT_ID}/beiqi-geoip:latest|g" docker-compose.yml
-        sed -i "s|context: ./services/geoip||g" docker-compose.yml
+        sed -i "s|build:|image: gcr.io/${PROJECT_ID}/beiqi-website:latest|g" deployment/docker-compose.yml
+        sed -i "s|context: ./services/website||g" deployment/docker-compose.yml
+        sed -i "s|build:|image: gcr.io/${PROJECT_ID}/beiqi-management:latest|g" deployment/docker-compose.yml
+        sed -i "s|context: ./services/management-panel||g" deployment/docker-compose.yml
+        sed -i "s|build:|image: gcr.io/${PROJECT_ID}/beiqi-admin-api:latest|g" deployment/docker-compose.yml
+        sed -i "s|context: ./services/admin-api||g" deployment/docker-compose.yml
+        sed -i "s|build:|image: gcr.io/${PROJECT_ID}/beiqi-web-api:latest|g" deployment/docker-compose.yml
+        sed -i "s|context: ./services/web-api||g" deployment/docker-compose.yml
+        sed -i "s|build:|image: gcr.io/${PROJECT_ID}/beiqi-geoip:latest|g" deployment/docker-compose.yml
+        sed -i "s|context: ./services/geoip||g" deployment/docker-compose.yml
 
   # Copy deployment files to GCS bucket
   - name: 'gcr.io/cloud-builders/gsutil'
@@ -101,7 +101,7 @@ steps:
         gcloud compute scp --zone=us-central1-a --quiet --ssh-key-file=/tmp/ssh-key --recurse ./* cloudbuild@beiqi-vm:/tmp/beiqi-deploy/
         
         # Execute setup script on VM
-        gcloud compute ssh cloudbuild@beiqi-vm --zone=us-central1-a --quiet --ssh-key-file=/tmp/ssh-key --command="cd /tmp/beiqi-deploy && bash setup-vm.sh"
+        gcloud compute ssh cloudbuild@beiqi-vm --zone=us-central1-a --quiet --ssh-key-file=/tmp/ssh-key --command="cd /tmp/beiqi-deploy && bash deployment/setup-vm.sh"
         
         # Clean up the temporary SSH key from VM metadata
         gcloud compute instances remove-metadata beiqi-vm --zone=us-central1-a --keys=ssh-keys
