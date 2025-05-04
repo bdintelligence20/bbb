@@ -88,28 +88,28 @@ steps:
         # Create a temporary SSH key
         ssh-keygen -t rsa -N "" -f /tmp/ssh-key
         
-        # Source environment variables
-        source .env || echo "Warning: .env file not found, using default values"
-        VM_NAME=${VM_NAME:-beiqi-vm}
-        VM_ZONE=${VM_ZONE:-us-central1-a}
+        # Use hardcoded values for VM name and zone
+        # You can change these to match your VM configuration
+        VM_NAME=beiqi-vm
+        VM_ZONE=us-central1-a
         
         # Add the public key to the VM's metadata
-        gcloud compute instances add-metadata ${VM_NAME} --zone=${VM_ZONE} --metadata-from-file ssh-keys=<(echo "cloudbuild:$(cat /tmp/ssh-key.pub)")
+        gcloud compute instances add-metadata $VM_NAME --zone=$VM_ZONE --metadata-from-file ssh-keys=<(echo "cloudbuild:$(cat /tmp/ssh-key.pub)")
         
         # Wait for SSH to become available
         sleep 10
         
         # Create deployment directory on VM
-        gcloud compute ssh cloudbuild@${VM_NAME} --zone=${VM_ZONE} --quiet --ssh-key-file=/tmp/ssh-key --command="mkdir -p /tmp/beiqi-deploy"
+        gcloud compute ssh cloudbuild@$VM_NAME --zone=$VM_ZONE --quiet --ssh-key-file=/tmp/ssh-key --command="mkdir -p /tmp/beiqi-deploy"
         
         # Copy deployment files to VM
-        gcloud compute scp --zone=${VM_ZONE} --quiet --ssh-key-file=/tmp/ssh-key --recurse ./* cloudbuild@${VM_NAME}:/tmp/beiqi-deploy/
+        gcloud compute scp --zone=$VM_ZONE --quiet --ssh-key-file=/tmp/ssh-key --recurse ./* cloudbuild@$VM_NAME:/tmp/beiqi-deploy/
         
         # Execute setup script on VM
-        gcloud compute ssh cloudbuild@${VM_NAME} --zone=${VM_ZONE} --quiet --ssh-key-file=/tmp/ssh-key --command="cd /tmp/beiqi-deploy && bash setup-vm.sh"
+        gcloud compute ssh cloudbuild@$VM_NAME --zone=$VM_ZONE --quiet --ssh-key-file=/tmp/ssh-key --command="cd /tmp/beiqi-deploy && bash setup-vm.sh"
         
         # Clean up the temporary SSH key from VM metadata
-        gcloud compute instances remove-metadata ${VM_NAME} --zone=${VM_ZONE} --keys=ssh-keys
+        gcloud compute instances remove-metadata $VM_NAME --zone=$VM_ZONE --keys=ssh-keys
 
 images:
   - 'gcr.io/${PROJECT_ID}/beiqi-website:${SHORT_SHA}'
