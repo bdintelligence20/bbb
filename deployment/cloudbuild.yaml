@@ -100,6 +100,9 @@ steps:
         # Copy deployment files to VM
         gcloud compute scp --zone=us-central1-a --quiet --ssh-key-file=/tmp/ssh-key --recurse ./* cloudbuild@beiqi-vm:/tmp/beiqi-deploy/
         
+        # Configure sudo for cloudbuild user (no password required)
+        gcloud compute ssh cloudbuild@beiqi-vm --zone=us-central1-a --quiet --ssh-key-file=/tmp/ssh-key --command="echo 'cloudbuild ALL=(ALL) NOPASSWD:ALL' | sudo tee /etc/sudoers.d/cloudbuild"
+        
         # Execute setup script on VM
         gcloud compute ssh cloudbuild@beiqi-vm --zone=us-central1-a --quiet --ssh-key-file=/tmp/ssh-key --command="cd /tmp/beiqi-deploy && bash deployment/setup-vm.sh"
         

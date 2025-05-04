@@ -3,18 +3,21 @@ set -e
 
 echo "Setting up BAIC Global Codebase deployment environment..."
 
-# Create directory structure
-mkdir -p /opt/beiqi/nginx/conf.d
-mkdir -p /opt/beiqi/mysql/data
-mkdir -p /opt/beiqi/mysql/init
-mkdir -p /opt/beiqi/redis/data
-mkdir -p /opt/beiqi/uploads
-mkdir -p /opt/beiqi/services
-mkdir -p /opt/beiqi/source/beiqi-home-master
-mkdir -p /opt/beiqi/source/beiqi-web-master
+# Create directory structure with sudo
+sudo mkdir -p /opt/beiqi/nginx/conf.d
+sudo mkdir -p /opt/beiqi/mysql/data
+sudo mkdir -p /opt/beiqi/mysql/init
+sudo mkdir -p /opt/beiqi/redis/data
+sudo mkdir -p /opt/beiqi/uploads
+sudo mkdir -p /opt/beiqi/services
+sudo mkdir -p /opt/beiqi/source/beiqi-home-master
+sudo mkdir -p /opt/beiqi/source/beiqi-web-master
 
 # Set permissions for uploads directory
-chmod 755 /opt/beiqi/uploads
+sudo chmod 755 /opt/beiqi/uploads
+
+# Make sure the cloudbuild user owns the directories
+sudo chown -R $(whoami):$(whoami) /opt/beiqi
 
 # Download SQL dump from GCS bucket
 echo "Downloading SQL dump from GCS bucket..."
@@ -55,6 +58,9 @@ if [ ! -f "/opt/beiqi/.env" ]; then
 else
   echo ".env file already exists, not overwriting."
 fi
+
+# Make sure Docker can access all the files
+sudo chown -R $(whoami):$(whoami) /opt/beiqi
 
 # Pull and start containers
 echo "Starting Docker containers..."
